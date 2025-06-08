@@ -1,92 +1,122 @@
 [
   {
-    "id": "RT3080",
-    "clientName": "Alice Johnson",
-    "items": ["Web Design", "SEO Optimization"],
-    "status": "Paid",
-    "total": 1200,
-    "createdAt": "2024-09-01T10:15:00Z",
-    "updatedAt": "2024-09-02T09:30:00Z"
+    "id": "RT3081",
+    "clientName": "Alan Turing",
+    "clientEmail": "alan@turing.io",
+    "fromAddress": "1 Computing Ave, Manchester",
+    "toAddress": "12 Bletchley Park, Milton Keynes",
+    "status": "paid",
+    "paymentTerms": 14,
+    "description": "Algorithm optimization",
+    "date": "2024-06-18",
+    "items": [
+      {
+        "name": "Optimization Service",
+        "quantity": 2,
+        "price": 1500,
+        "total": 3000
+      }
+    ],
+    "total": 3000
   },
   {
-    "id": "TR2314",
-    "clientName": "Bob Smith",
-    "items": ["App Development", "Maintenance"],
-    "status": "Pending",
-    "total": 3000,
-    "createdAt": "2024-09-03T13:20:00Z",
-    "updatedAt": "2024-09-04T14:45:00Z"
+    "id": "RT3082",
+    "clientName": "Grace Hopper",
+    "clientEmail": "grace@hopperlabs.com",
+    "fromAddress": "22 Tech Lane, New York",
+    "toAddress": "99 Binary Blvd, San Francisco",
+    "status": "pending",
+    "paymentTerms": 30,
+    "description": "COBOL system upgrade",
+    "date": "2024-06-20",
+    "items": [
+      { "name": "System Upgrade", "quantity": 1, "price": 4200, "total": 4200 }
+    ],
+    "total": 4200
   },
   {
-    "id": "ER3424",
-    "clientName": "Cathy Lee",
-    "items": ["Consultation"],
-    "status": "Draft",
-    "total": 450,
-    "createdAt": "2024-09-05T09:00:00Z",
-    "updatedAt": "2024-09-15T11:00:00Z"
+    "id": "RT3083",
+    "clientName": "Margaret Hamilton",
+    "clientEmail": "margaret@nasa.org",
+    "fromAddress": "3 Apollo Dr, Houston",
+    "toAddress": "10 Space Way, Cape Canaveral",
+    "status": "draft",
+    "paymentTerms": 7,
+    "description": "Software engineering consultancy",
+    "date": "2024-06-22",
+    "items": [
+      { "name": "Consulting", "quantity": 3, "price": 1000, "total": 3000 }
+    ],
+    "total": 3000
   },
   {
-    "id": "HV4390",
-    "clientName": "Daniel Kim",
-    "items": ["Graphic Design", "Logo Creation"],
-    "status": "Paid",
-    "total": 850,
-    "createdAt": "2024-09-07T12:10:00Z",
-    "updatedAt": "2024-09-08T08:50:00Z"
+    "id": "RT3084",
+    "clientName": "Tim Berners-Lee",
+    "clientEmail": "tim@w3.org",
+    "fromAddress": "10 WWW Lane, Geneva",
+    "toAddress": "55 Internet Rd, London",
+    "status": "paid",
+    "paymentTerms": 21,
+    "description": "Web infrastructure setup",
+    "date": "2024-06-25",
+    "items": [
+      {
+        "name": "Infrastructure Setup",
+        "quantity": 1,
+        "price": 5000,
+        "total": 5000
+      }
+    ],
+    "total": 5000
   },
   {
-    "id": "OP9986",
-    "clientName": "Ella Thompson",
-    "items": ["Data Analysis"],
-    "status": "Pending",
-    "total": 1100,
-    "createdAt": "2024-09-10T16:00:00Z",
-    "updatedAt": "2024-09-11T09:45:00Z"
+    "id": "RT3085",
+    "clientName": "Radia Perlman",
+    "clientEmail": "radia@spanningtree.net",
+    "fromAddress": "67 Network St, Seattle",
+    "toAddress": "88 Layer 2 Ct, Palo Alto",
+    "status": "pending",
+    "paymentTerms": 14,
+    "description": "Network protocol design",
+    "date": "2024-06-28",
+    "items": [
+      { "name": "Protocol Design", "quantity": 1, "price": 4500, "total": 4500 }
+    ],
+    "total": 4500
   },
   {
-    "id": "LA9538",
-    "clientName": "Frank Wright",
-    "items": ["Software Testing", "Bug Fixing"],
-    "status": "Paid",
-    "total": 1600,
-    "createdAt": "2024-09-12T10:30:00Z",
-    "updatedAt": "2024-09-13T14:00:00Z"
+    "id": "RT3086",
+    "clientName": "Linus Torvalds",
+    "clientEmail": "linus@linuxfoundation.org",
+    "fromAddress": "42 Kernel Blvd, Helsinki",
+    "toAddress": "101 Open Source Ln, San Jose",
+    "status": "paid",
+    "paymentTerms": 30,
+    "description": "Kernel development",
+    "date": "2024-07-01",
+    "items": [
+      { "name": "Kernel Work", "quantity": 2, "price": 2500, "total": 5000 }
+    ],
+    "total": 5000
   },
   {
-    "id": "KA6666",
-    "clientName": "Grace Lin",
-    "items": ["UX Review", "Wireframing"],
-    "status": "Paid",
-    "total": 950,
-    "createdAt": "2024-09-14T11:15:00Z",
-    "updatedAt": "2024-09-14T16:45:00Z"
-  },
-  {
-    "id": "CB7602",
-    "clientName": "Henry Ford",
-    "items": ["API Integration"],
-    "status": "Draft",
-    "total": 1350,
-    "createdAt": "2024-09-17T08:40:00Z",
-    "updatedAt": "2024-09-20T10:00:00Z"
-  },
-  {
-    "id": "NM2211",
-    "clientName": "Isabel Young",
-    "items": ["Cloud Migration", "Security Audit"],
-    "status": "Pending",
-    "total": 4000,
-    "createdAt": "2024-09-19T14:50:00Z",
-    "updatedAt": "2024-09-21T13:30:00Z"
-  },
-  {
-    "id": "UI3649",
-    "clientName": "Jack Reacher",
-    "items": ["DevOps Setup", "CI/CD Pipeline"],
-    "status": "Paid",
-    "total": 2700,
-    "createdAt": "2024-09-22T15:25:00Z",
-    "updatedAt": "2024-09-23T10:10:00Z"
+    "id": "RT3087",
+    "clientName": "Katherine Johnson",
+    "clientEmail": "katherine@mathgenius.org",
+    "fromAddress": "5 Trajectory Ln, Virginia",
+    "toAddress": "15 NASA Blvd, DC",
+    "status": "draft",
+    "paymentTerms": 7,
+    "description": "Mathematical modeling",
+    "date": "2024-07-05",
+    "items": [
+      {
+        "name": "Modeling Service",
+        "quantity": 1,
+        "price": 3500,
+        "total": 3500
+      }
+    ],
+    "total": 3500
   }
 ]

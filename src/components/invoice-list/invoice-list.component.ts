@@ -1,25 +1,41 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { InvoiceService } from '../../services/invoice.service';
 import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
-import { CommonModule } from '@angular/common';
 import { EmptyListComponent } from '../empty-list/empty-list.component';
 
 @Component({
   selector: 'app-invoice-list',
-  standalone: true, // Using standalone component (modern Angular approach)
-  imports: [CommonModule, EmptyListComponent, InvoiceItemComponent], // Need CommonModule for *ngFor
+  standalone: true,
+  imports: [CommonModule, EmptyListComponent, InvoiceItemComponent],
   templateUrl: './invoice-list.component.html',
   styleUrl: './invoice-list.component.scss',
 })
 export class InvoiceListComponent {
   private invoiceService = inject(InvoiceService);
-  // invoices$ = this.invoiceService.fetchInvoiceData(); // Observable for async pipe
 
-  // get invoices from localstorage
+  invoices$ = this.invoiceService.invoices$;
 
-  // Count of invoices for display
-  get invoiceCount(): number {
-    console.log(this.invoiceService.getInvoices());
-    return this.invoiceService.getInvoices().length;
+  // Create reactive selectedStatus
+  private selectedStatus$ = new BehaviorSubject<string>('All');
+
+  // Filter invoices based on selected status
+  filteredInvoices$ = combineLatest([
+    this.invoices$,
+    this.selectedStatus$,
+  ]).pipe(
+    map(([invoices, selectedStatus]) =>
+      selectedStatus === 'All'
+        ? invoices
+        : invoices.filter((inv) => inv.status === selectedStatus)
+    )
+  );
+
+  // For reactive count
+  invoiceCount$ = this.invoices$.pipe(map((invoices) => invoices.length));
+
+  filterBy(status: string) {
+    this.selectedStatus$.next(status);
   }
 }

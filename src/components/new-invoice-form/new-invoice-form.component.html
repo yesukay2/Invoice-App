@@ -1,6 +1,8 @@
 <section class="new-invoice-form">
-  <form [formGroup]="newInvoiceForm">
+  <form [formGroup]="newInvoiceForm" (ngSubmit)="onSubmit('pending')">
     <h1 class="form-title">New Invoice</h1>
+
+    <!-- Bill From -->
     <div id="bill-from">
       <h2 id="bill-from-title">Bill From</h2>
       <div class="bill-from-address-container">
@@ -17,16 +19,14 @@
           <label for="city">City</label>
           <input type="text" class="city-input" formControlName="fromCity" />
         </div>
-
         <div class="post-code-cluster">
-          <label for="post-code-input">Post Code</label>
+          <label for="post-code">Post Code</label>
           <input
             type="text"
             class="post-code-input"
             formControlName="fromPostCode"
           />
         </div>
-
         <div class="country-cluster">
           <label for="country">Country</label>
           <input
@@ -37,11 +37,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Bill To -->
     <div id="bill-to">
       <h2 id="bill-to-title">Bill To</h2>
-
       <div class="client-name-cluster">
-        <label for="client-name">Client's Name</label>
+        <label>Client's Name</label>
         <input
           type="text"
           class="client-name-input"
@@ -50,16 +51,16 @@
       </div>
 
       <div class="client-email-cluster">
-        <label for="client-email">Client's Email</label>
+        <label>Client's Email</label>
         <input
-          type="text"
+          type="email"
           class="client-email-input"
           formControlName="clientEmail"
         />
       </div>
 
       <div class="street-address-cluster">
-        <label for="street-address">Street Address</label>
+        <label>Street Address</label>
         <input
           type="text"
           class="street-address-input"
@@ -69,21 +70,19 @@
 
       <div class="bill-to-address-cluster">
         <div class="city-cluster">
-          <label for="city">City</label>
+          <label>City</label>
           <input type="text" class="city-input" formControlName="toCity" />
         </div>
-
         <div class="post-code-cluster">
-          <label for="post-code-input">Post Code</label>
+          <label>Post Code</label>
           <input
             type="text"
             class="post-code-input"
             formControlName="toPostCode"
           />
         </div>
-
         <div class="country-cluster">
-          <label for="country">Country</label>
+          <label>Country</label>
           <input
             type="text"
             class="country-input"
@@ -94,12 +93,15 @@
 
       <div class="date-terms-cluster">
         <div class="invoice-date-cluster">
-          <label for="invoice-date">Invoice Date</label>
-          <input type="date" id="invoice-date-input" formControlName="date" />
+          <label>Invoice Date</label>
+          <input
+            type="date"
+            class="invoice-date-input"
+            formControlName="date"
+          />
         </div>
-
         <div class="payment-terms-cluster">
-          <label for="payment-terms">Payment Terms</label>
+          <label>Payment Terms</label>
           <select
             id="payment-terms-input"
             formControlName="paymentTerms"
@@ -114,7 +116,7 @@
       </div>
 
       <div class="description-cluster">
-        <label for="description">Project Description</label>
+        <label>Project Description</label>
         <input
           type="text"
           id="description-input"
@@ -122,59 +124,87 @@
         />
       </div>
 
+      <!-- Item List -->
       <h2 id="item-list-title">Item List</h2>
-
       <table class="item-list">
-        <tr class="item-list-header">
-          <th>Item Name</th>
-          <th>Qty.</th>
-          <th>Price</th>
-          <th>Total</th>
-        </tr>
-
-        <tr class="input-cluster">
-          <td>
-            <input
-              type="text"
-              id="item-name-input"
-              class="item-name-input"
-              formControlName="itemName"
-              class="item-name-input"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              id="item-qty-input"
-              class="item-qty-input"
-              formControlName="itemQty"
-            />
-          </td>
-          <td>
-            <input
-              type="number"
-              id="item-price-input"
-              class="item-price-input"
-              formControlName="itemPrice"
-            />
-          </td>
-          <td>
-            <div class="item-total-cluster" id="item-total-input">156.00</div>
-          </td>
-          <td class="delete-invoice-btn-container">
-            <button class="delete-invoice-btn">
-              <img src="../../assets/images/delete.png" alt="" />
-            </button>
-          </td>
-        </tr>
+        <thead>
+          <tr class="item-list-header">
+            <th>Item Name</th>
+            <th>Qty.</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody formArrayName="items">
+          <tr
+            *ngFor="let item of items.controls; let i = index"
+            [formGroupName]="i"
+            class="input-cluster"
+          >
+            <td>
+              <input
+                type="text"
+                class="item-name-input"
+                formControlName="itemName"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="item-qty-input"
+                formControlName="itemQty"
+                (input)="updateItemTotal(i)"
+              />
+            </td>
+            <td>
+              <input
+                type="number"
+                class="item-price-input"
+                formControlName="itemPrice"
+                (input)="updateItemTotal(i)"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="item-total-input"
+                formControlName="itemTotal"
+                readonly
+              />
+            </td>
+            <td class="delete-invoice-btn-container">
+              <button
+                type="button"
+                class="delete-invoice-btn"
+                (click)="removeItem(i)"
+              >
+                <img src="../../assets/images/delete.png" alt="delete" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
+
+      <button type="button" class="add-item-btn" (click)="addItem()">
+        + Add Item
+      </button>
     </div>
-    <div id="item-list"></div>
+
+    <!-- CTA -->
     <div id="cta-container">
-      <button class="discard-btn">Discard</button>
+      <button type="button" class="discard-btn" (click)="onCancel()">
+        Discard
+      </button>
       <div id="save-btn-container">
-        <button class="save-as-draft-btn">Save as draft</button>
-        <button class="save-and-send-btn">Save & Send</button>
+        <button
+          class="save-as-draft-btn"
+          type="button"
+          (click)="onSubmit('draft')"
+        >
+          Save as Draft
+        </button>
+        <button class="save-and-send-btn" type="submit">Save & Send</button>
       </div>
     </div>
   </form>

@@ -14,7 +14,7 @@
     <section class="cta-bar">
       <div id="invoice-count">
         <h1>Invoices</h1>
-        <p>There are {{ invoiceCount }} total invoices</p>
+        <p>There are {{ invoiceCount$ | async }} total invoices</p>
       </div>
 
       <div class="invoice-list-cta">
@@ -24,10 +24,10 @@
             <img src="../../assets/images/down-chevron.png" alt="" />
           </button>
           <ul class="select-dropdown hidden">
-            <li>All</li>
-            <li>Draft</li>
-            <li>Pending</li>
-            <li>Paid</li>
+            <li (click)="filterBy('All')">All</li>
+            <li (click)="filterBy('Draft')">Draft</li>
+            <li (click)="filterBy('Pending')">Pending</li>
+            <li (click)="filterBy('Paid')">Paid</li>
           </ul>
         </div>
         <button id="new-invoice-btn">
@@ -35,9 +35,9 @@
         </button>
       </div>
     </section>
+
     <section class="invoice-list">
-      <!-- Render invoice items using *ngFor -->
-      @for (invoice of invoices$ | async; track invoice.id) {
+      @for (invoice of filteredInvoices$ | async; track invoice.id) {
       <app-invoice-item [invoice]="invoice"></app-invoice-item>
       } @empty {
       <app-empty-list></app-empty-list>

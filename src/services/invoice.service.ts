@@ -1,40 +1,65 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Invoice } from '../utils/interfaces/invoice';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
+import { Invoice } from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InvoiceService {
-  // Store invoices in memory after fetching
-  private invoices: Invoice[] = [];
+  private invoicesSubject = new BehaviorSubject<Invoice[]>([]);
+  invoices$ = this.invoicesSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
-
-  // Fetch invoices and store them
-  fetchInvoiceData(): Observable<Invoice[]> {
-    const localStorageData: Invoice[] = JSON.parse(
-      localStorage.getItem('invoices') || '[]'
-    );
-
-    if (localStorageData.length > 0) {
+  constructor() {
+    const stored = localStorage.getItem('invoices');
+    if (stored) {
+      this.invoicesSubject.next(JSON.parse(stored));
+    } else {
+      this.loadInitialData();
     }
-    return this.http.get<Invoice[]>('assets/data/mock-invoices.json').pipe(
-      tap((invoices) => {
-        this.invoices = invoices;
-      })
+
+    // Sync BehaviorSubject changes to localStorage
+    this.invoices$.subscribe((invoices) => {
+      localStorage.setItem('invoices', JSON.stringify(invoices));
+    });
+  }
+
+  private loadInitialData() {
+    // Load from a mock JSON file or initialize empty array
+    // If you want, you can remove this and just start with []
+    fetch('assets/data/mock-invoices.json')
+      .then((res) => res.json())
+      .then((data: Invoice[]) => this.invoicesSubject.next(data))
+      .catch(() => this.invoicesSubject.next([]));
+  }
+
+  getInvoices() {
+    return this.invoices$;
+  }
+
+  getInvoiceById(id: string) {
+    return this.invoices$.pipe(
+      map((invoices: Invoice[]) =>
+        invoices.find((inv: { id: string }) => inv.id === id)
+      )
     );
   }
 
-  // Getter for the invoices (could also use a BehaviorSubject for reactive updates)
-  getInvoices(): Invoice[] {
-    return this.invoices;
+  addInvoice(invoice: Invoice) {
+    const current = this.invoicesSubject.getValue();
+    this.invoicesSubject.next([...current, invoice]);
   }
 
-  addNewInvoice(): void {}
+  updateInvoice(updated: Invoice) {
+    const updatedList = this.invoicesSubject
+      .getValue()
+      .map((inv) => (inv.id === updated.id ? updated : inv));
+    this.invoicesSubject.next(updatedList);
+  }
 
-  updateInvoice(id: number) {}
-
-  deleteInvoice(id: number) {}
+  deleteInvoice(id: string) {
+    const updatedList = this.invoicesSubject
+      .getValue()
+      .filter((inv) => inv.id !== id);
+    this.invoicesSubject.next(updatedList);
+  }
 }

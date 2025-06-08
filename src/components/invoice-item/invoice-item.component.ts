@@ -1,6 +1,6 @@
 // invoice-item.component.ts
 import { Component, Input } from '@angular/core';
-import { Invoice } from '../../utils/interfaces/invoice';
+import { Invoice } from '../../models/invoice.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
