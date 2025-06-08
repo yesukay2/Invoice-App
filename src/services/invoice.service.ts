@@ -44,6 +44,11 @@ export class InvoiceService {
     );
   }
 
+  getCurrentStatus(id: string): string | undefined {
+    const invoice = this.invoicesSubject.value.find((inv) => inv.id === id);
+    return invoice?.status;
+  }
+
   addInvoice(invoice: Invoice) {
     const current = this.invoicesSubject.getValue();
     this.invoicesSubject.next([...current, invoice]);

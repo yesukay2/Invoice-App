@@ -19,9 +19,9 @@ import { Invoice, InvoiceItem, RawItem } from '../../models/invoice.model';
   styleUrl: './new-invoice-form.component.scss',
 })
 export class NewInvoiceFormComponent implements OnInit {
-  private invoiceService = inject(InvoiceService);
+  protected invoiceService = inject(InvoiceService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  protected router = inject(Router);
 
   isEditMode = false;
   editingInvoiceId: string | null = null;
@@ -58,6 +58,10 @@ export class NewInvoiceFormComponent implements OnInit {
     } else {
       this.addItem(); // Add initial empty item
     }
+  }
+  // Add to NewInvoiceFormComponent class
+  getFormTitle(): string {
+    return ''; // Default empty for new invoice
   }
 
   get items(): FormArray {
@@ -96,6 +100,10 @@ export class NewInvoiceFormComponent implements OnInit {
   }
 
   populateForm(invoice: Invoice) {
+    while (this.items.length) {
+      this.items.removeAt(0);
+    }
+
     this.newInvoiceForm.patchValue({
       fromStreetAddress: invoice.senderAddress.street,
       fromCity: invoice.senderAddress.city,
@@ -122,6 +130,7 @@ export class NewInvoiceFormComponent implements OnInit {
     });
   }
 
+  // Update onSubmit in new-invoice-form.component.ts
   onSubmit(status: 'draft' | 'pending') {
     if (this.newInvoiceForm.invalid) {
       this.newInvoiceForm.markAllAsTouched();
@@ -129,10 +138,17 @@ export class NewInvoiceFormComponent implements OnInit {
     }
 
     const raw = this.newInvoiceForm.getRawValue();
+    const currentStatus =
+      this.isEditMode && this.editingInvoiceId
+        ? (this.invoiceService.getCurrentStatus(this.editingInvoiceId) as
+            | 'draft'
+            | 'pending'
+            | 'paid')
+        : status;
 
     const invoice: Invoice = {
       id: this.editingInvoiceId || Date.now().toString(),
-      status,
+      status: currentStatus || status,
       senderAddress: {
         street: raw.fromStreetAddress!,
         city: raw.fromCity!,
@@ -164,19 +180,12 @@ export class NewInvoiceFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.invoiceService.updateInvoice(invoice);
-      alert('Invoice updated!');
     } else {
       this.invoiceService.addInvoice(invoice);
-      alert(`Invoice saved as ${status}`);
     }
 
-    this.newInvoiceForm.reset();
-    this.items.clear();
-    this.addItem();
-
-    this.router.navigate(['/']);
+    this.router.navigate(['/invoices']);
   }
-
   onCancel() {
     this.newInvoiceForm.reset();
     this.items.clear();

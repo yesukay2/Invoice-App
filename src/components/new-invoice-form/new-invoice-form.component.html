@@ -1,6 +1,6 @@
 <section class="new-invoice-form">
   <form [formGroup]="newInvoiceForm" (ngSubmit)="onSubmit('pending')">
-    <h1 class="form-title">New Invoice</h1>
+    <h1 class="form-title">{{ getFormTitle() || "New Invoice" }}</h1>
 
     <!-- Bill From -->
     <div id="bill-from">

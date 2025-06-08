@@ -20,6 +20,14 @@ export const routes: Routes = [
         (m) => m.NewInvoiceFormComponent
       ),
   },
+
+  {
+    path: 'invoices/:id/edit',
+    loadComponent: () =>
+      import(
+        '../components/edit-invoice-form/edit-invoice-form.component'
+      ).then((m) => m.EditInvoiceFormComponent),
+  },
   {
     path: 'invoices/:id/delete',
     loadComponent: () =>
@@ -33,13 +41,5 @@ export const routes: Routes = [
       import('../components/invoice-details/invoice-details.component').then(
         (m) => m.InvoiceDetailsComponent
       ),
-  },
-
-  {
-    path: 'invoices/:id/edit',
-    loadComponent: () =>
-      import(
-        '../components/edit-invoice-form/edit-invoice-form.component'
-      ).then((m) => m.EditInvoiceFormComponent),
   },
 ];

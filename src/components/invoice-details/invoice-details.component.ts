@@ -1,36 +1,3 @@
-// import { Component, inject, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { InvoiceService } from '../../services/invoice.service';
-// import { Invoice } from '../../models/invoice.model';
-// import { CommonModule } from '@angular/common';
-
-// @Component({
-//   selector: 'app-invoice-details',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './invoice-details.component.html',
-//   styleUrl: './invoice-details.component.scss',
-// })
-// export class InvoiceDetailsComponent implements OnInit {
-//   private route = inject(ActivatedRoute);
-//   private invoiceService = inject(InvoiceService);
-
-//   invoice?: Invoice;
-
-//   ngOnInit(): void {
-//     const id = this.route.snapshot.paramMap.get('id');
-//     if (id) {
-//       this.invoiceService.getInvoiceById(id).subscribe((invoice) => {
-//         this.invoice = invoice;
-//       });
-//     }
-//   }
-
-//   goBack() {
-//     window.history.back();
-//   }
-// }
-
 // invoice-details.component.ts
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
