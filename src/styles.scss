@@ -1,6 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@use "mixins" as *;
+@use "variables" as *;
 
 @font-face {
   font-family: spartan;
   src: url("./assets/fonts/spartan/Spartan-Regular.ttf");
+}
+* {
+  font-family: spartan;
+  margin: 0;
+  padding: 0;
 }

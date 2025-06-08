@@ -1,1 +1,47 @@
+<section class="invoice-screen">
+  <aside>
+    <div class="side-bar">
+      <img src="assets/images/logo.svg" id="logo" alt="logo" />
+      <div class="theme-X-avatar">
+        <img src="assets/images/moon.svg" alt="theme-toggler" />
+        <hr />
+        <img src="assets/images/avatar.png" alt="avatar" />
+      </div>
+    </div>
+  </aside>
 
+  <main>
+    <section class="cta-bar">
+      <div id="invoice-count">
+        <h1>Invoices</h1>
+        <p>There are {{ invoiceCount }} total invoices</p>
+      </div>
+
+      <div class="invoice-list-cta">
+        <div class="custom-select">
+          <button class="select-button">
+            <span class="selected-value">Filter by status</span>
+            <img src="../../assets/images/down-chevron.png" alt="" />
+          </button>
+          <ul class="select-dropdown hidden">
+            <li>All</li>
+            <li>Draft</li>
+            <li>Pending</li>
+            <li>Paid</li>
+          </ul>
+        </div>
+        <button id="new-invoice-btn">
+          <span id="plus">+</span>New Invoice
+        </button>
+      </div>
+    </section>
+    <section class="invoice-list">
+      <!-- Render invoice items using *ngFor -->
+      @for (invoice of invoices$ | async; track invoice.id) {
+      <app-invoice-item [invoice]="invoice"></app-invoice-item>
+      } @empty {
+      <app-empty-list></app-empty-list>
+      }
+    </section>
+  </main>
+</section>

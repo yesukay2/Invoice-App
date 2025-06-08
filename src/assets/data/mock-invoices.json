@@ -1,116 +1,89 @@
 [
   {
-    "id": 1,
+    "id": "RT3080",
     "clientName": "Alice Johnson",
-    "items": [
-      "Web Design",
-      "SEO Optimization"
-    ],
+    "items": ["Web Design", "SEO Optimization"],
     "status": "Paid",
     "total": 1200,
     "createdAt": "2024-09-01T10:15:00Z",
     "updatedAt": "2024-09-02T09:30:00Z"
   },
   {
-    "id": 2,
+    "id": "TR2314",
     "clientName": "Bob Smith",
-    "items": [
-      "App Development",
-      "Maintenance"
-    ],
+    "items": ["App Development", "Maintenance"],
     "status": "Pending",
     "total": 3000,
     "createdAt": "2024-09-03T13:20:00Z",
     "updatedAt": "2024-09-04T14:45:00Z"
   },
   {
-    "id": 3,
+    "id": "ER3424",
     "clientName": "Cathy Lee",
-    "items": [
-      "Consultation"
-    ],
-    "status": "Overdue",
+    "items": ["Consultation"],
+    "status": "Draft",
     "total": 450,
     "createdAt": "2024-09-05T09:00:00Z",
     "updatedAt": "2024-09-15T11:00:00Z"
   },
   {
-    "id": 4,
+    "id": "HV4390",
     "clientName": "Daniel Kim",
-    "items": [
-      "Graphic Design",
-      "Logo Creation"
-    ],
+    "items": ["Graphic Design", "Logo Creation"],
     "status": "Paid",
     "total": 850,
     "createdAt": "2024-09-07T12:10:00Z",
     "updatedAt": "2024-09-08T08:50:00Z"
   },
   {
-    "id": 5,
+    "id": "OP9986",
     "clientName": "Ella Thompson",
-    "items": [
-      "Data Analysis"
-    ],
+    "items": ["Data Analysis"],
     "status": "Pending",
     "total": 1100,
     "createdAt": "2024-09-10T16:00:00Z",
     "updatedAt": "2024-09-11T09:45:00Z"
   },
   {
-    "id": 6,
+    "id": "LA9538",
     "clientName": "Frank Wright",
-    "items": [
-      "Software Testing",
-      "Bug Fixing"
-    ],
+    "items": ["Software Testing", "Bug Fixing"],
     "status": "Paid",
     "total": 1600,
     "createdAt": "2024-09-12T10:30:00Z",
     "updatedAt": "2024-09-13T14:00:00Z"
   },
   {
-    "id": 7,
+    "id": "KA6666",
     "clientName": "Grace Lin",
-    "items": [
-      "UX Review",
-      "Wireframing"
-    ],
+    "items": ["UX Review", "Wireframing"],
     "status": "Paid",
     "total": 950,
     "createdAt": "2024-09-14T11:15:00Z",
     "updatedAt": "2024-09-14T16:45:00Z"
   },
   {
-    "id": 8,
+    "id": "CB7602",
     "clientName": "Henry Ford",
-    "items": [
-      "API Integration"
-    ],
-    "status": "Overdue",
+    "items": ["API Integration"],
+    "status": "Draft",
     "total": 1350,
     "createdAt": "2024-09-17T08:40:00Z",
     "updatedAt": "2024-09-20T10:00:00Z"
   },
   {
-    "id": 9,
+    "id": "NM2211",
     "clientName": "Isabel Young",
-    "items": [
-      "Cloud Migration",
-      "Security Audit"
-    ],
+    "items": ["Cloud Migration", "Security Audit"],
     "status": "Pending",
     "total": 4000,
     "createdAt": "2024-09-19T14:50:00Z",
     "updatedAt": "2024-09-21T13:30:00Z"
   },
   {
-    "id": 10,
+    "id": "UI3649",
     "clientName": "Jack Reacher",
-    "items": [
-      "DevOps Setup",
-      "CI/CD Pipeline"
-    ],
+    "items": ["DevOps Setup", "CI/CD Pipeline"],
     "status": "Paid",
     "total": 2700,
     "createdAt": "2024-09-22T15:25:00Z",

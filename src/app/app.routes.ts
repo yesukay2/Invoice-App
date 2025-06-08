@@ -16,6 +16,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'invoices/delete',
+    loadComponent: () =>
+      import('../components/delete-modal/delete-modal.component').then(
+        (m) => m.DeleteModalComponent
+      ),
+  },
+  {
     path: 'invoices/:id',
     loadComponent: () =>
       import('../components/invoice-details/invoice-details.component').then(

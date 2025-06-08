@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
+import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
+import { CommonModule } from '@angular/common';
+import { EmptyListComponent } from '../empty-list/empty-list.component';
 
 @Component({
   selector: 'app-invoice-list',
-  imports: [],
+  standalone: true, // Using standalone component (modern Angular approach)
+  imports: [CommonModule, EmptyListComponent, InvoiceItemComponent], // Need CommonModule for *ngFor
   templateUrl: './invoice-list.component.html',
   styleUrl: './invoice-list.component.scss',
 })
 export class InvoiceListComponent {
-  constructor(private invoiceService: InvoiceService) {}
+  private invoiceService = inject(InvoiceService);
+  // invoices$ = this.invoiceService.fetchInvoiceData(); // Observable for async pipe
 
-  ngOnInit() {
-    this.invoiceService.fetchInvoiceData();
+  // get invoices from localstorage
+
+  // Count of invoices for display
+  get invoiceCount(): number {
+    console.log(this.invoiceService.getInvoices());
+    return this.invoiceService.getInvoices().length;
   }
 }

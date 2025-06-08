@@ -1,0 +1,29 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+#empty-list {
+  @include flex-center(column, center);
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+img {
+  margin-bottom: 4rem;
+}
+
+#instruction {
+  color: $grey-200;
+  width: 14.4rem;
+  font-size: 12px;
+  letter-spacing: -0.25px;
+  line-height: 1.22rem;
+  text-align: center;
+}
+
+#strong-text {
+  font-weight: bold;
+}

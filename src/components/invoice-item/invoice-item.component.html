@@ -1,0 +1,27 @@
+<section class="invoice-item">
+  <div class="invoice-id">
+    <span class="hashtag">#</span>
+    <span class="invoice-number">{{ invoice.id }}</span>
+  </div>
+  <div class="due-date">
+    <span class="due">Due </span>
+    <span class="date">{{ invoice.createdAt | date }}</span>
+  </div>
+  <div class="client-name">{{ invoice.clientName }}</div>
+  <div class="total-amount">
+    <span>£</span>
+    <span>{{ invoice.total | number : "1.2-2" }}</span>
+  </div>
+  <div class="status-expand-cluster">
+    <div
+      class="payment-status"
+      [ngClass]="'status-' + invoice.status.toLowerCase()"
+    >
+      <span class="dot"></span>
+      <span class="status">{{ invoice.status }}</span>
+    </div>
+    <button class="expand-invoice">
+      <img src="../../assets/images/next.png" alt="expand-invoice-button" />
+    </button>
+  </div>
+</section>

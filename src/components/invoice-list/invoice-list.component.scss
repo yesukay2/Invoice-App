@@ -1,0 +1,191 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+* {
+  font-family: spartan;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-screen {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.invoice-list {
+  height: 100vh;
+  width: 100%;
+}
+
+aside {
+  left: 0;
+  position: fixed;
+}
+
+.side-bar {
+  height: 100vh;
+  width: 6.4rem;
+  background-color: $black-300;
+  border-radius: 0 1.2rem 1.2rem 0;
+  @include flex-center(column, center);
+  justify-content: space-between;
+}
+
+main {
+  margin: auto;
+  width: 60%;
+}
+
+.cta-bar {
+  @include flex-center(row, center);
+  justify-content: space-between;
+  gap: 20%;
+  padding-block-start: 4.5rem;
+  margin-bottom: 4.05rem;
+}
+
+.cta-bar > #invoice-count {
+  @include flex-center(column, start);
+
+  & > h1 {
+    font-size: 2rem;
+    line-height: auto;
+    letter-spacing: -1px;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: $black-200;
+  }
+
+  & > p {
+    font-size: 0.75rem;
+    letter-spacing: -0.25px;
+    font-weight: 100;
+    color: $grey-200;
+  }
+}
+
+#new-invoice-btn {
+  @include flex-center(row, center);
+  border-radius: 3rem;
+  height: 3rem;
+  width: 9.375rem;
+  gap: 1rem;
+  box-shadow: none;
+  border: none;
+  background-color: $violet-300;
+  color: $light-bg;
+  font: 12px 15 -0.25px;
+  font-weight: 600;
+}
+
+.invoice-list-cta {
+  @include flex-center(row, center);
+  gap: 3rem;
+}
+
+#new-invoice-btn > #plus {
+  font-size: 1.5rem;
+  background-color: $light-bg;
+  color: $violet-300;
+  padding: 0.2rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 5rem;
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  max-width: 100%;
+}
+
+.select-button {
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.675em 1em;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.select-button img {
+  transition: transform ease-in-out 0.3s;
+  width: px;
+  height: 1rem;
+  width: 1rem;
+}
+
+.select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #caced1;
+  border-radius: 0.25rem;
+  background-color: white;
+  list-style: none;
+  padding: 10px;
+  margin: 10px 0 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.select-dropdown::-webkit-scrollbar {
+  width: 7px;
+}
+
+.select-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+
+.select-dropdown::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+
+.select-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Highlight the selected option */
+.select-dropdown li.selected {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.select-dropdown li:hover,
+.select-dropdown li:focus {
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.select-dropdown.hidden {
+  display: none;
+}
+
+#logo {
+  width: inherit;
+}
+
+.theme-X-avatar {
+  @include flex-center(column, center);
+  height: 7.3rem;
+  justify-content: space-between;
+  padding-block: 1.5rem;
+}
+
+hr {
+  width: 6.3rem;
+  height: 0.01px;
+  color: $grey-50;
+}
