@@ -15,6 +15,7 @@ export const routes: Routes = [
   },
   {
     path: 'invoices/new',
+    outlet: 'modal',
     loadComponent: () =>
       import('../components/new-invoice-form/new-invoice-form.component').then(
         (m) => m.NewInvoiceFormComponent
@@ -23,6 +24,7 @@ export const routes: Routes = [
 
   {
     path: 'invoices/:id/edit',
+    outlet: 'modal',
     loadComponent: () =>
       import(
         '../components/edit-invoice-form/edit-invoice-form.component'

@@ -72,6 +72,7 @@
 .dot {
   @include dot();
   background-color: $green-100;
+  // margin-left: 1rem;
 }
 
 .status {
@@ -88,10 +89,12 @@
   letter-spacing: -0.25px;
   padding-block: 0.813rem;
   @include flex-center(row, center);
+  justify-content: center;
   border-radius: 6px;
   color: $green-100;
   background: #33d6a014;
   margin-right: 20px;
+  margin-left: 20px;
   padding-block: 0.75rem;
   width: 6.5rem;
   height: 1.5rem;

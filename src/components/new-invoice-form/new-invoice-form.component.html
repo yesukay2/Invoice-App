@@ -1,211 +1,219 @@
-<section class="new-invoice-form">
-  <form [formGroup]="newInvoiceForm" (ngSubmit)="onSubmit('pending')">
-    <h1 class="form-title">{{ getFormTitle() || "New Invoice" }}</h1>
+<div class="invoice-overlay" (click)="onCancel()">
+  <div class="new-invoice-form" (click)="$event.stopPropagation()">
+    <section class="new-invoice-form">
+      <form [formGroup]="newInvoiceForm" (ngSubmit)="onSubmit('pending')">
+        <h1 class="form-title">{{ getFormTitle() || "New Invoice" }}</h1>
 
-    <!-- Bill From -->
-    <div id="bill-from">
-      <h2 id="bill-from-title">Bill From</h2>
-      <div class="bill-from-address-container">
-        <label for="street-address">Street Address</label>
-        <input
-          type="text"
-          class="street-address-input"
-          formControlName="fromStreetAddress"
-        />
-      </div>
+        <!-- Bill From -->
+        <div id="bill-from">
+          <h2 id="bill-from-title">Bill From</h2>
+          <div class="bill-from-address-container">
+            <label for="street-address">Street Address</label>
+            <input
+              type="text"
+              class="street-address-input"
+              formControlName="fromStreetAddress"
+            />
+          </div>
 
-      <div class="bill-from-city-cluster">
-        <div class="city-cluster">
-          <label for="city">City</label>
-          <input type="text" class="city-input" formControlName="fromCity" />
-        </div>
-        <div class="post-code-cluster">
-          <label for="post-code">Post Code</label>
-          <input
-            type="text"
-            class="post-code-input"
-            formControlName="fromPostCode"
-          />
-        </div>
-        <div class="country-cluster">
-          <label for="country">Country</label>
-          <input
-            type="text"
-            class="country-input"
-            formControlName="fromCountry"
-          />
-        </div>
-      </div>
-    </div>
-
-    <!-- Bill To -->
-    <div id="bill-to">
-      <h2 id="bill-to-title">Bill To</h2>
-      <div class="client-name-cluster">
-        <label>Client's Name</label>
-        <input
-          type="text"
-          class="client-name-input"
-          formControlName="clientName"
-        />
-      </div>
-
-      <div class="client-email-cluster">
-        <label>Client's Email</label>
-        <input
-          type="email"
-          class="client-email-input"
-          formControlName="clientEmail"
-        />
-      </div>
-
-      <div class="street-address-cluster">
-        <label>Street Address</label>
-        <input
-          type="text"
-          class="street-address-input"
-          formControlName="toStreetAddress"
-        />
-      </div>
-
-      <div class="bill-to-address-cluster">
-        <div class="city-cluster">
-          <label>City</label>
-          <input type="text" class="city-input" formControlName="toCity" />
-        </div>
-        <div class="post-code-cluster">
-          <label>Post Code</label>
-          <input
-            type="text"
-            class="post-code-input"
-            formControlName="toPostCode"
-          />
-        </div>
-        <div class="country-cluster">
-          <label>Country</label>
-          <input
-            type="text"
-            class="country-input"
-            formControlName="toCountry"
-          />
-        </div>
-      </div>
-
-      <div class="date-terms-cluster">
-        <div class="invoice-date-cluster">
-          <label>Invoice Date</label>
-          <input
-            type="date"
-            class="invoice-date-input"
-            formControlName="date"
-          />
-        </div>
-        <div class="payment-terms-cluster">
-          <label>Payment Terms</label>
-          <select
-            id="payment-terms-input"
-            formControlName="paymentTerms"
-            name="payment-terms"
-          >
-            <option value="1">Net 1 Day</option>
-            <option value="7">Net 7 Days</option>
-            <option value="14">Net 14 Days</option>
-            <option value="30">Net 30 Days</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="description-cluster">
-        <label>Project Description</label>
-        <input
-          type="text"
-          id="description-input"
-          formControlName="description"
-        />
-      </div>
-
-      <!-- Item List -->
-      <h2 id="item-list-title">Item List</h2>
-      <table class="item-list">
-        <thead>
-          <tr class="item-list-header">
-            <th>Item Name</th>
-            <th>Qty.</th>
-            <th>Price</th>
-            <th>Total</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody formArrayName="items">
-          <tr
-            *ngFor="let item of items.controls; let i = index"
-            [formGroupName]="i"
-            class="input-cluster"
-          >
-            <td>
+          <div class="bill-from-city-cluster">
+            <div class="city-cluster">
+              <label for="city">City</label>
               <input
                 type="text"
-                class="item-name-input"
-                formControlName="itemName"
+                class="city-input"
+                formControlName="fromCity"
               />
-            </td>
-            <td>
-              <input
-                type="number"
-                class="item-qty-input"
-                formControlName="itemQty"
-                (input)="updateItemTotal(i)"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                class="item-price-input"
-                formControlName="itemPrice"
-                (input)="updateItemTotal(i)"
-              />
-            </td>
-            <td>
+            </div>
+            <div class="post-code-cluster">
+              <label for="post-code">Post Code</label>
               <input
                 type="text"
-                class="item-total-input"
-                formControlName="itemTotal"
-                readonly
+                class="post-code-input"
+                formControlName="fromPostCode"
               />
-            </td>
-            <td class="delete-invoice-btn-container">
-              <button
-                type="button"
-                class="delete-invoice-btn"
-                (click)="removeItem(i)"
+            </div>
+            <div class="country-cluster">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                class="country-input"
+                formControlName="fromCountry"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Bill To -->
+        <div id="bill-to">
+          <h2 id="bill-to-title">Bill To</h2>
+          <div class="client-name-cluster">
+            <label>Client's Name</label>
+            <input
+              type="text"
+              class="client-name-input"
+              formControlName="clientName"
+            />
+          </div>
+
+          <div class="client-email-cluster">
+            <label>Client's Email</label>
+            <input
+              type="email"
+              class="client-email-input"
+              formControlName="clientEmail"
+            />
+          </div>
+
+          <div class="street-address-cluster">
+            <label>Street Address</label>
+            <input
+              type="text"
+              class="street-address-input"
+              formControlName="toStreetAddress"
+            />
+          </div>
+
+          <div class="bill-to-address-cluster">
+            <div class="city-cluster">
+              <label>City</label>
+              <input type="text" class="city-input" formControlName="toCity" />
+            </div>
+            <div class="post-code-cluster">
+              <label>Post Code</label>
+              <input
+                type="text"
+                class="post-code-input"
+                formControlName="toPostCode"
+              />
+            </div>
+            <div class="country-cluster">
+              <label>Country</label>
+              <input
+                type="text"
+                class="country-input"
+                formControlName="toCountry"
+              />
+            </div>
+          </div>
+
+          <div class="date-terms-cluster">
+            <div class="invoice-date-cluster">
+              <label>Invoice Date</label>
+              <input
+                type="date"
+                class="invoice-date-input"
+                formControlName="date"
+              />
+            </div>
+            <div class="payment-terms-cluster">
+              <label>Payment Terms</label>
+              <select
+                id="payment-terms-input"
+                formControlName="paymentTerms"
+                name="payment-terms"
               >
-                <img src="../../assets/images/delete.png" alt="delete" />
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <option value="1">Net 1 Day</option>
+                <option value="7">Net 7 Days</option>
+                <option value="14">Net 14 Days</option>
+                <option value="30">Net 30 Days</option>
+              </select>
+            </div>
+          </div>
 
-      <button type="button" class="add-item-btn" (click)="addItem()">
-        + Add Item
-      </button>
-    </div>
+          <div class="description-cluster">
+            <label>Project Description</label>
+            <input
+              type="text"
+              id="description-input"
+              formControlName="description"
+            />
+          </div>
 
-    <!-- CTA -->
-    <div id="cta-container">
-      <button type="button" class="discard-btn" (click)="onCancel()">
-        Discard
-      </button>
-      <div id="save-btn-container">
-        <button
-          class="save-as-draft-btn"
-          type="button"
-          (click)="onSubmit('draft')"
-        >
-          Save as Draft
-        </button>
-        <button class="save-and-send-btn" type="submit">Save & Send</button>
-      </div>
-    </div>
-  </form>
-</section>
+          <!-- Item List -->
+          <h2 id="item-list-title">Item List</h2>
+          <table class="item-list">
+            <thead>
+              <tr class="item-list-header">
+                <th>Item Name</th>
+                <th>Qty.</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody formArrayName="items">
+              <tr
+                *ngFor="let item of items.controls; let i = index"
+                [formGroupName]="i"
+                class="input-cluster"
+              >
+                <td>
+                  <input
+                    type="text"
+                    class="item-name-input"
+                    formControlName="itemName"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    class="item-qty-input"
+                    formControlName="itemQty"
+                    (input)="updateItemTotal(i)"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    class="item-price-input"
+                    formControlName="itemPrice"
+                    (input)="updateItemTotal(i)"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="item-total-input"
+                    formControlName="itemTotal"
+                    readonly
+                  />
+                </td>
+                <td class="delete-invoice-btn-container">
+                  <button
+                    type="button"
+                    class="delete-invoice-btn"
+                    (click)="removeItem(i)"
+                  >
+                    <img src="../../assets/images/delete.png" alt="delete" />
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="button" class="add-item-btn" (click)="addItem()">
+            + Add Item
+          </button>
+        </div>
+
+        <!-- CTA -->
+        <div id="cta-container">
+          <button type="button" class="discard-btn" (click)="onCancel()">
+            Discard
+          </button>
+          <div id="save-btn-container">
+            <button
+              class="save-as-draft-btn"
+              type="button"
+              (click)="onSubmit('draft')"
+            >
+              Save as Draft
+            </button>
+            <button class="save-and-send-btn" type="submit">Save & Send</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

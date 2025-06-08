@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: '../new-invoice-form/new-invoice-form.component.html', // Use the same template
   imports: [CommonModule, ReactiveFormsModule, RouterModule], // Add CommonModule
+  styleUrls: ['../new-invoice-form/new-invoice-form.component.scss'],
 })
 export class EditInvoiceFormComponent extends NewInvoiceFormComponent {
   override ngOnInit() {

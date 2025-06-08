@@ -1,225 +1,221 @@
-@use "mixins" as *;
 @use "variables" as *;
+@use "mixins" as *;
+/* Base Styles */
+.invoice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 72px;
+  z-index: 1000;
+}
 
 .new-invoice-form {
-  @include flex-center(column, start);
-  width: 35.5rem;
-  padding-left: 2rem;
-  border-radius: 0 1rem 1rem 0;
-  background-color: $grey-75;
+  background-color: #f8f8fb;
+  width: 100%;
+  max-width: 730px;
+  padding: 56px 56px 32px;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
 }
 
-form {
-  padding: 0%;
-  padding-top: 1.4rem;
-  padding-bottom: 1.4rem;
+.new-invoice-form-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 48px;
+  box-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
 }
 
-input {
-  width: 31.5rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
-  background-color: transparent;
-}
-
-.bill-from-city-cluster,
-.bill-to-address-cluster,
-.date-terms-cluster {
-  @include flex-center(row, start);
-  flex-grow: 1;
-  margin: 0%;
-  padding: 0%;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.bill-from-address-container,
-.post-code-cluster,
-.country-cluster,
-.client-name-cluster,
-.client-email-cluster,
-.street-address-cluster,
-.city-cluster,
-.post-code-cluster,
-.invoice-date-cluster,
-.payment-terms-cluster,
-.description-cluster {
-  @include flex-center(column, start);
-  margin-bottom: 1.5rem;
-}
-
-.bill-from-city-cluster input,
-.bill-to-address-cluster input,
-.date-terms-cluster input {
-  width: 9.5rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
+/* Header */
+.form-header {
+  margin-bottom: 32px;
 }
 
 .form-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
+  font-size: 24px;
+  font-weight: bold;
+  color: #0c0e16;
+  margin: 0;
 }
 
-#bill-from-title {
-  font-size: 12px;
-  color: $violet-200;
-  margin-bottom: 2rem;
+.invoice-id {
+  color: #888eb0;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  color: #7c5dfa;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 16px;
 }
 
 label {
-  font-size: 12px;
-  color: $grey-200;
-  text-align: left;
-  margin-bottom: 0.7rem;
+  display: block;
+  font-size: 14px;
+  color: #7e88c3;
+  margin-bottom: 8px;
 }
 
-#item-list-title {
-  font-size: 1.1rem;
-  color: $dark-grey;
-}
-
-th {
-  text-align: left;
-  color: $dark-grey;
-  font-size: 12px;
-  font-weight: 800;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-  border-bottom: 1px solid $grey-100;
-  border-collapse: collapse;
-}
-#cta-container {
-  @include flex-center(row);
-  justify-content: space-between;
-  margin-top: 1.5rem;
-}
-
-.cta-container-scroll {
-  position: fixed;
-  bottom: 0;
-  width: 31.5rem;
-  background-color: red;
-  border-radius: 2rem;
-}
-
-#save-btn-container {
-  @include flex-center(row);
-  gap: 1rem;
-}
-
-.save-as-draft-btn {
-  background-color: $black-300;
-  color: $black-50;
-}
-
-.save-and-send-btn {
-  background-color: $violet-300;
-  color: $light-bg;
-}
-
-.discard-btn,
-.save-as-draft-btn,
-.save-and-send-btn {
-  padding: 16px 24px;
-  border-radius: 24px;
-  font-weight: bold;
-  font-size: 13px;
-  cursor: pointer;
-  border: none;
-}
-
-.discard-btn {
-  background-color: rgb($grey-100, 0.5);
-  color: $grey-150;
-}
-
-.save-as-draft-btn,
-.save-and-send-btn {
-  padding: 16px 24px;
-  border-radius: 24px;
-  font-weight: bold;
-  font-size: 13px;
-  cursor: pointer;
-  border: none;
-}
-
-#bill-to-title {
-  font-size: 12px;
-  color: $violet-200;
-  margin-bottom: 2rem;
-}
-
-.invoice-date-cluster input,
-.payment-terms-cluster select {
-  width: 15rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
-  background-color: transparent;
-}
-
-#payment-terms-input {
-  width: 15rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
-  background-color: transparent;
-}
-
-select {
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #dfe3fa;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #0c0e16;
   background-color: white;
-  -webkit-appearance: none; /* for Safari/Chrome */
-  -moz-appearance: none; /* for Firefox */
-  appearance: none;
-  border: 1px solid #ccc;
-  padding: 8px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #7c5dfa;
+}
+
+/* Address Cluster */
+.address-cluster {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* Date & Terms Cluster */
+.date-terms-cluster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Item List */
+.item-list-container {
+  margin-top: 16px;
 }
 
 .item-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.item-name-input {
-  width: 9.5rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
+.item-list-header {
+  color: #7e88c3;
+  font-size: 14px;
+  text-align: left;
 }
 
-.item-price-input {
-  width: 6.25rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
+.item-list-header th {
+  padding: 16px 0;
+  font-weight: normal;
 }
 
-.item-qty-input {
-  width: 2.87rem;
-  height: 3rem;
-  border: 0.5px solid $grey-100;
-  border-radius: 0.5rem;
+.item-row td {
+  padding: 8px 0;
 }
 
-.input-cluster {
-  margin-bottom: 1.5rem;
-  width: 31.5rem;
+.item-name {
+  width: 100%;
 }
 
-.input-cluster td {
-  padding-right: 1rem;
+.item-qty {
+  width: 50px;
 }
 
-.delete-invoice-btn {
-  align-items: end;
+.item-price,
+.item-total {
+  width: 80px;
+}
+
+.delete-btn-cell {
+  text-align: center;
+}
+
+.delete-btn {
+  background: none;
   border: none;
-  background-color: transparent;
   cursor: pointer;
+  padding: 8px;
 }
-.delete-invoice-btn-container {
-  align-items: end;
+
+.delete-btn:hover svg path {
+  fill: #ec5757;
+}
+
+/* Buttons */
+.add-item-btn {
+  width: 100%;
+  background-color: #f9fafe;
+  color: #7e88c3;
+  border: none;
+  border-radius: 24px;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+.add-item-btn:hover {
+  background-color: #dfe3fa;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.btn {
+  padding: 16px 24px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-discard {
+  background-color: #f9fafe;
+  color: #7e88c3;
+}
+
+.btn-discard:hover {
+  background-color: #dfe3fa;
+}
+
+.btn-draft {
+  background-color: #373b53;
+  color: white;
+  margin-right: 8px;
+}
+
+.btn-draft:hover {
+  background-color: #0c0e16;
+}
+
+.btn-primary {
+  background-color: #7c5dfa;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #9277ff;
+}
+
+.save-buttons {
+  display: flex;
 }

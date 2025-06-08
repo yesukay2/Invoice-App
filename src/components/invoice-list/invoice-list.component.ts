@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { InvoiceService } from '../../services/invoice.service';
 import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
 import { EmptyListComponent } from '../empty-list/empty-list.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 @Component({
   selector: 'app-invoice-list',
   standalone: true,
@@ -19,7 +19,7 @@ import { RouterModule } from '@angular/router';
 })
 export class InvoiceListComponent {
   private invoiceService = inject(InvoiceService);
-
+  private router = inject(Router);
   invoices$ = this.invoiceService.invoices$;
 
   // Create reactive selectedStatus
@@ -42,5 +42,9 @@ export class InvoiceListComponent {
 
   filterBy(status: string) {
     this.selectedStatus$.next(status);
+  }
+
+  newInvoiceModal() {
+    this.router.navigate([{ outlets: { modal: ['invoices', 'new'] } }]);
   }
 }

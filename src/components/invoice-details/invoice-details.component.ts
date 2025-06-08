@@ -39,7 +39,10 @@ export class InvoiceDetailsComponent implements OnInit {
 
   editInvoice() {
     if (this.invoice) {
-      this.router.navigate(['/invoices', this.invoice.id, 'edit']);
+      // this.router.navigate(['/invoices', this.invoice.id, 'edit']);
+      this.router.navigate([
+        { outlets: { modal: ['invoices', this.invoice.id, 'edit'] } },
+      ]);
     }
   }
 

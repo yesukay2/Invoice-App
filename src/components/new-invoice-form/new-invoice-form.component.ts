@@ -189,7 +189,11 @@ export class NewInvoiceFormComponent implements OnInit {
   onCancel() {
     this.newInvoiceForm.reset();
     this.items.clear();
-    this.addItem();
-    this.router.navigate(['/']);
+    // this.addItem();
+    // this.router.navigate(['/']);
+
+    this.router.navigate([{ outlets: { modal: null } }], {
+      relativeTo: this.route.parent,
+    });
   }
 }

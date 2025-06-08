@@ -30,7 +30,7 @@
             <li (click)="filterBy('Paid')">Paid</li>
           </ul>
         </div>
-        <a [routerLink]="['/invoices/new']">
+        <a (click)="newInvoiceModal()">
           <button id="new-invoice-btn">
             <span id="plus">+</span>New Invoice
           </button>
