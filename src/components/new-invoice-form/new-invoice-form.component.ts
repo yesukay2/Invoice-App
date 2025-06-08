@@ -1,13 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   FormArray,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
-import { Invoice } from '../../models/invoice.model';
+import { Invoice, InvoiceItem, RawItem } from '../../models/invoice.model';
 
 @Component({
   selector: 'app-new-invoice-form',
@@ -16,44 +18,68 @@ import { Invoice } from '../../models/invoice.model';
   templateUrl: './new-invoice-form.component.html',
   styleUrl: './new-invoice-form.component.scss',
 })
-export class NewInvoiceFormComponent {
+export class NewInvoiceFormComponent implements OnInit {
   private invoiceService = inject(InvoiceService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  isEditMode = false;
+  editingInvoiceId: string | null = null;
 
   newInvoiceForm = new FormGroup({
-    fromStreetAddress: new FormControl(''),
-    fromCity: new FormControl(''),
-    fromPostCode: new FormControl(''),
-    fromCountry: new FormControl(''),
-    clientName: new FormControl(''),
-    clientEmail: new FormControl(''),
-    toStreetAddress: new FormControl(''),
-    toCity: new FormControl(''),
-    toPostCode: new FormControl(''),
-    toCountry: new FormControl(''),
-    date: new FormControl(''),
+    fromStreetAddress: new FormControl('', Validators.required),
+    fromCity: new FormControl('', Validators.required),
+    fromPostCode: new FormControl('', Validators.required),
+    fromCountry: new FormControl('', Validators.required),
+    clientName: new FormControl('', Validators.required),
+    clientEmail: new FormControl('', [Validators.required, Validators.email]),
+    toStreetAddress: new FormControl('', Validators.required),
+    toCity: new FormControl('', Validators.required),
+    toPostCode: new FormControl('', Validators.required),
+    toCountry: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
     paymentTerms: new FormControl('7'),
-    description: new FormControl(''),
-    items: new FormArray([
-      new FormGroup({
-        itemName: new FormControl(''),
-        itemQty: new FormControl(1),
-        itemPrice: new FormControl(0),
-        itemTotal: new FormControl({ value: 0, disabled: true }),
-      }),
-    ]),
+    description: new FormControl('', Validators.required),
+    items: new FormArray([]),
   });
 
-  get items() {
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.editingInvoiceId = id;
+      this.invoiceService.getInvoiceById(id).subscribe((invoice) => {
+        if (invoice) {
+          this.populateForm(invoice);
+        } else {
+          console.error('Invoice not found');
+        }
+      });
+    } else {
+      this.addItem(); // Add initial empty item
+    }
+  }
+
+  get items(): FormArray {
     return this.newInvoiceForm.get('items') as FormArray;
   }
 
-  addItem() {
+  addItem(item?: any) {
     this.items.push(
       new FormGroup({
-        itemName: new FormControl(''),
-        itemQty: new FormControl(1),
-        itemPrice: new FormControl(0),
-        itemTotal: new FormControl({ value: 0, disabled: true }),
+        itemName: new FormControl(item?.itemName || '', Validators.required),
+        itemQty: new FormControl(item?.itemQty || 1, [
+          Validators.required,
+          Validators.min(1),
+        ]),
+        itemPrice: new FormControl(item?.itemPrice || 0, [
+          Validators.required,
+          Validators.min(0),
+        ]),
+        itemTotal: new FormControl({
+          value: item?.itemTotal || 0,
+          disabled: true,
+        }),
       })
     );
   }
@@ -69,13 +95,43 @@ export class NewInvoiceFormComponent {
     group.get('itemTotal')?.setValue(qty * price);
   }
 
+  populateForm(invoice: Invoice) {
+    this.newInvoiceForm.patchValue({
+      fromStreetAddress: invoice.senderAddress.street,
+      fromCity: invoice.senderAddress.city,
+      fromPostCode: invoice.senderAddress.postCode,
+      fromCountry: invoice.senderAddress.country,
+      clientName: invoice.clientName,
+      clientEmail: invoice.clientEmail,
+      toStreetAddress: invoice.clientAddress.street,
+      toCity: invoice.clientAddress.city,
+      toPostCode: invoice.clientAddress.postCode,
+      toCountry: invoice.clientAddress.country,
+      date: invoice.createdAt,
+      paymentTerms: invoice.paymentTerms.toString(),
+      description: invoice.description,
+    });
+
+    invoice.items.forEach((item) => {
+      this.addItem({
+        itemName: item.name,
+        itemQty: item.quantity,
+        itemPrice: item.price,
+        itemTotal: item.total,
+      });
+    });
+  }
+
   onSubmit(status: 'draft' | 'pending') {
-    if (this.newInvoiceForm.invalid) return;
+    if (this.newInvoiceForm.invalid) {
+      this.newInvoiceForm.markAllAsTouched();
+      return;
+    }
 
     const raw = this.newInvoiceForm.getRawValue();
 
     const invoice: Invoice = {
-      id: Date.now().toString(),
+      id: this.editingInvoiceId || Date.now().toString(),
       status,
       senderAddress: {
         street: raw.fromStreetAddress!,
@@ -86,7 +142,7 @@ export class NewInvoiceFormComponent {
       clientName: raw.clientName!,
       clientEmail: raw.clientEmail!,
       clientAddress: {
-        street: raw.toStreetAddress!!,
+        street: raw.toStreetAddress!,
         city: raw.toCity!,
         postCode: raw.toPostCode!,
         country: raw.toCountry!,
@@ -94,30 +150,37 @@ export class NewInvoiceFormComponent {
       createdAt: raw.date!,
       paymentTerms: +raw.paymentTerms!,
       description: raw.description!,
-      items: raw.items.map((item) => ({
-        name: item.itemName!,
+      items: raw.items.map((item: RawItem) => ({
+        name: item.itemName,
         quantity: item.itemQty!,
         price: item.itemPrice!,
         total: item.itemQty! * item.itemPrice!,
       })),
       total: raw.items.reduce(
-        (sum, item) => sum + item.itemQty! * item.itemPrice!,
+        (sum, item: RawItem) => sum + item.itemQty! * item.itemPrice!,
         0
       ),
     };
 
-    this.invoiceService.addInvoice(invoice);
+    if (this.isEditMode) {
+      this.invoiceService.updateInvoice(invoice);
+      alert('Invoice updated!');
+    } else {
+      this.invoiceService.addInvoice(invoice);
+      alert(`Invoice saved as ${status}`);
+    }
 
     this.newInvoiceForm.reset();
     this.items.clear();
     this.addItem();
 
-    alert(`Invoice saved as ${status}`);
+    this.router.navigate(['/']);
   }
 
   onCancel() {
     this.newInvoiceForm.reset();
     this.items.clear();
     this.addItem();
+    this.router.navigate(['/']);
   }
 }

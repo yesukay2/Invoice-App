@@ -25,3 +25,9 @@ export interface Invoice {
   items: InvoiceItem[];
   total: number;
 }
+
+export interface RawItem {
+  itemName: string;
+  itemQty: number;
+  itemPrice: number;
+}

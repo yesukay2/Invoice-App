@@ -1,4 +1,10 @@
-<section class="invoice-item">
+<section
+  class="invoice-item"
+  appOverdue
+  [createdAt]="invoice.createdAt"
+  [paymentTerms]="invoice.paymentTerms"
+  [status]="invoice.status"
+>
   <div class="invoice-id">
     <span class="hashtag">#</span>
     <span class="invoice-number">{{ invoice.id }}</span>
@@ -20,7 +26,7 @@
       <span class="dot"></span>
       <span class="status">{{ invoice.status }}</span>
     </div>
-    <button class="expand-invoice">
+    <button class="expand-invoice" (click)="expandInvoice()">
       <img src="../../assets/images/next.png" alt="expand-invoice-button" />
     </button>
   </div>

@@ -1,122 +1,68 @@
 [
   {
     "id": "RT3081",
-    "clientName": "Alan Turing",
-    "clientEmail": "alan@turing.io",
-    "fromAddress": "1 Computing Ave, Manchester",
-    "toAddress": "12 Bletchley Park, Milton Keynes",
-    "status": "paid",
-    "paymentTerms": 14,
-    "description": "Algorithm optimization",
-    "date": "2024-06-18",
+    "clientName": "Ada Lovelace",
+    "clientEmail": "ada@lovelace.com",
+    "status": "pending",
+    "paymentTerms": 30,
+    "description": "Website Design",
+    "createdAt": "2025-06-01",
     "items": [
       {
-        "name": "Optimization Service",
-        "quantity": 2,
-        "price": 1500,
+        "name": "Website Design",
+        "quantity": 1,
+        "price": 3000,
         "total": 3000
       }
     ],
-    "total": 3000
+    "total": 3000,
+    "senderAddress": {
+      "street": "1 Computing Ave",
+      "city": "Manchester",
+      "postCode": "M13 9PL",
+      "country": "UK"
+    },
+    "clientAddress": {
+      "street": "12 Bletchley Park",
+      "city": "Milton Keynes",
+      "postCode": "MK3 6EB",
+      "country": "UK"
+    }
   },
   {
     "id": "RT3082",
-    "clientName": "Grace Hopper",
-    "clientEmail": "grace@hopperlabs.com",
-    "fromAddress": "22 Tech Lane, New York",
-    "toAddress": "99 Binary Blvd, San Francisco",
-    "status": "pending",
-    "paymentTerms": 30,
-    "description": "COBOL system upgrade",
-    "date": "2024-06-20",
-    "items": [
-      { "name": "System Upgrade", "quantity": 1, "price": 4200, "total": 4200 }
-    ],
-    "total": 4200
-  },
-  {
-    "id": "RT3083",
-    "clientName": "Margaret Hamilton",
-    "clientEmail": "margaret@nasa.org",
-    "fromAddress": "3 Apollo Dr, Houston",
-    "toAddress": "10 Space Way, Cape Canaveral",
-    "status": "draft",
-    "paymentTerms": 7,
-    "description": "Software engineering consultancy",
-    "date": "2024-06-22",
-    "items": [
-      { "name": "Consulting", "quantity": 3, "price": 1000, "total": 3000 }
-    ],
-    "total": 3000
-  },
-  {
-    "id": "RT3084",
-    "clientName": "Tim Berners-Lee",
-    "clientEmail": "tim@w3.org",
-    "fromAddress": "10 WWW Lane, Geneva",
-    "toAddress": "55 Internet Rd, London",
+    "clientName": "Alan Turing",
+    "clientEmail": "alan@turing.com",
     "status": "paid",
-    "paymentTerms": 21,
-    "description": "Web infrastructure setup",
-    "date": "2024-06-25",
-    "items": [
-      {
-        "name": "Infrastructure Setup",
-        "quantity": 1,
-        "price": 5000,
-        "total": 5000
-      }
-    ],
-    "total": 5000
-  },
-  {
-    "id": "RT3085",
-    "clientName": "Radia Perlman",
-    "clientEmail": "radia@spanningtree.net",
-    "fromAddress": "67 Network St, Seattle",
-    "toAddress": "88 Layer 2 Ct, Palo Alto",
-    "status": "pending",
     "paymentTerms": 14,
-    "description": "Network protocol design",
-    "date": "2024-06-28",
-    "items": [
-      { "name": "Protocol Design", "quantity": 1, "price": 4500, "total": 4500 }
-    ],
-    "total": 4500
-  },
-  {
-    "id": "RT3086",
-    "clientName": "Linus Torvalds",
-    "clientEmail": "linus@linuxfoundation.org",
-    "fromAddress": "42 Kernel Blvd, Helsinki",
-    "toAddress": "101 Open Source Ln, San Jose",
-    "status": "paid",
-    "paymentTerms": 30,
-    "description": "Kernel development",
-    "date": "2024-07-01",
-    "items": [
-      { "name": "Kernel Work", "quantity": 2, "price": 2500, "total": 5000 }
-    ],
-    "total": 5000
-  },
-  {
-    "id": "RT3087",
-    "clientName": "Katherine Johnson",
-    "clientEmail": "katherine@mathgenius.org",
-    "fromAddress": "5 Trajectory Ln, Virginia",
-    "toAddress": "15 NASA Blvd, DC",
-    "status": "draft",
-    "paymentTerms": 7,
-    "description": "Mathematical modeling",
-    "date": "2024-07-05",
+    "description": "App Development",
+    "createdAt": "2025-05-25",
     "items": [
       {
-        "name": "Modeling Service",
+        "name": "Frontend Module",
+        "quantity": 2,
+        "price": 1500,
+        "total": 3000
+      },
+      {
+        "name": "Backend API",
         "quantity": 1,
-        "price": 3500,
-        "total": 3500
+        "price": 2000,
+        "total": 2000
       }
     ],
-    "total": 3500
+    "total": 5000,
+    "senderAddress": {
+      "street": "23 Enigma Way",
+      "city": "Cambridge",
+      "postCode": "CB3 0FA",
+      "country": "UK"
+    },
+    "clientAddress": {
+      "street": "14 Computation St",
+      "city": "Oxford",
+      "postCode": "OX1 2JD",
+      "country": "UK"
+    }
   }
 ]

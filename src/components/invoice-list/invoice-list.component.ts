@@ -4,11 +4,16 @@ import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { InvoiceService } from '../../services/invoice.service';
 import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
 import { EmptyListComponent } from '../empty-list/empty-list.component';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-invoice-list',
   standalone: true,
-  imports: [CommonModule, EmptyListComponent, InvoiceItemComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    EmptyListComponent,
+    InvoiceItemComponent,
+  ],
   templateUrl: './invoice-list.component.html',
   styleUrl: './invoice-list.component.scss',
 })

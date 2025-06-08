@@ -30,9 +30,11 @@
             <li (click)="filterBy('Paid')">Paid</li>
           </ul>
         </div>
-        <button id="new-invoice-btn">
-          <span id="plus">+</span>New Invoice
-        </button>
+        <a [routerLink]="['/invoices/new']">
+          <button id="new-invoice-btn">
+            <span id="plus">+</span>New Invoice
+          </button>
+        </a>
       </div>
     </section>
 

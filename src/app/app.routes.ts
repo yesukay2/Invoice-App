@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'invoices',
+    pathMatch: 'full',
+  },
+  {
     path: 'invoices',
     loadComponent: () =>
       import('../components/invoice-list/invoice-list.component').then(
@@ -16,7 +21,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'invoices/delete',
+    path: 'invoices/:id/delete',
     loadComponent: () =>
       import('../components/delete-modal/delete-modal.component').then(
         (m) => m.DeleteModalComponent

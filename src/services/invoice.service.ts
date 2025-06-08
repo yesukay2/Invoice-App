@@ -62,4 +62,10 @@ export class InvoiceService {
       .filter((inv) => inv.id !== id);
     this.invoicesSubject.next(updatedList);
   }
+
+  private calculatePaymentDue(createdAt: string, paymentTerms: number): string {
+    const date = new Date(createdAt);
+    date.setDate(date.getDate() + paymentTerms);
+    return date.toISOString().split('T')[0];
+  }
 }
