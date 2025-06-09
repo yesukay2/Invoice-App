@@ -1,58 +1,88 @@
-// style delete modal
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+@use "mixins" as *;
+@use "variables" as *;
+
+.delete-modal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.464);
+  z-index: 20;
+
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 9999;
+  justify-content: center;
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 400px;
+  max-width: 25rem;
+  border-radius: 8px;
+  background-color: white;
+  padding: 48px;
 }
 
-.modal-title {
+.modal-content h1 {
   font-size: 24px;
-  margin-bottom: 10px;
+  font-weight: bold;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  color: #0c0e16;
 }
 
-.modal-text {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  width: 100%;
+.modal-content p {
+  color: #888eb0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 22px;
+  letter-spacing: -0.25px;
 }
 
 .cancel-btn {
-  margin-right: 10px;
-  background-color: #ccc;
-  color: #333;
+  @include light-blue-12;
+  background-color: #f9fafe;
+  color: #7e88c3;
   border: none;
-  padding: 10px 20px;
-  border-radius: 1.5rem;
+  font-weight: bold;
+  padding: 17px 23px;
   cursor: pointer;
+  border-radius: 24px;
+}
+
+.discard-btn {
+  @include light-blue-12;
+  background-color: #f9fafe;
+  color: #7e88c3;
+  border: none;
+  font-weight: bold;
+  padding: 17px 23px;
+  cursor: pointer;
+  border-radius: 24px;
 }
 
 .delete-btn {
-  background-color: #f44336;
+  @include light-blue-12;
+  background-color: #ec5757;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 1.5rem;
+  font-weight: bold;
+  padding: 17px 23px;
   cursor: pointer;
+  border-radius: 24px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.modal-content div {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    margin: 0 24px;
+  }
 }

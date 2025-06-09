@@ -1,0 +1,128 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+:host {
+  position: fixed;
+}
+aside {
+  left: 0;
+  position: fixed;
+}
+
+.side-bar {
+  height: 100vh;
+  width: 6.4rem;
+  background-color: $black-300;
+  border-radius: 0 1.2rem 1.2rem 0;
+  @include flex-center(column, center);
+  justify-content: space-between;
+}
+
+.sidebar-wrapper {
+  background-color: #373b53;
+  width: 103px;
+  height: 100vh;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.logo-container {
+  width: 103px;
+  height: 103px;
+  background-color: #7c5dfa;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo-button-bg {
+  position: absolute;
+  bottom: 0;
+  background-color: #9277ff;
+  height: 50%;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-photo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.darkmode-toggle .toggle-button {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 32.1px;
+}
+
+.toggle-icon {
+  height: 19.99px;
+  width: 19.9px;
+}
+
+.hr {
+  width: 100%;
+  border: 1px solid #494e6e;
+}
+
+.logo {
+  z-index: 10;
+  width: inherit;
+  // height: 37.71px;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-wrapper {
+    width: 100vw;
+    height: 80px;
+    flex-direction: row;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+    padding-right: 32px;
+  }
+
+  .hr {
+    height: 100%;
+  }
+
+  .darkmode-toggle .toggle-button {
+    margin-bottom: 0px;
+  }
+  .sidebar-wrapper {
+    border-radius: 0%;
+  }
+
+  .logo-container {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 100%;
+    width: 80px;
+    overflow: hidden;
+  }
+}

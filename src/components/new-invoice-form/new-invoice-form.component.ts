@@ -10,11 +10,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from '../../services/invoice.service';
 import { Invoice, InvoiceItem, RawItem } from '../../models/invoice.model';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-new-invoice-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NavBarComponent],
   templateUrl: './new-invoice-form.component.html',
   styleUrl: './new-invoice-form.component.scss',
 })
@@ -25,6 +26,14 @@ export class NewInvoiceFormComponent implements OnInit {
 
   isEditMode = false;
   editingInvoiceId: string | null = null;
+  showPaymentTerm = false;
+
+  paymentTerms = [
+    { id: 1, label: 'Net 1 Day' },
+    { id: 7, label: 'Net 7 Days' },
+    { id: 14, label: 'Net 14 Days' },
+    { id: 30, label: 'Net 30 Days' },
+  ];
 
   newInvoiceForm = new FormGroup({
     fromStreetAddress: new FormControl('', Validators.required),
@@ -38,7 +47,7 @@ export class NewInvoiceFormComponent implements OnInit {
     toPostCode: new FormControl('', Validators.required),
     toCountry: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
-    paymentTerms: new FormControl('7'),
+    paymentTerms: new FormControl(7), // Default to Net 7 Days
     description: new FormControl('', Validators.required),
     items: new FormArray([]),
   });
@@ -59,9 +68,28 @@ export class NewInvoiceFormComponent implements OnInit {
       this.addItem(); // Add initial empty item
     }
   }
-  // Add to NewInvoiceFormComponent class
+
+  get paymentTermsControl(): FormControl {
+    return this.newInvoiceForm.get('paymentTerms') as FormControl;
+  }
+
+  toggleShowTerm() {
+    this.showPaymentTerm = !this.showPaymentTerm;
+  }
+
+  setSelectedTerm(termId: number) {
+    this.paymentTermsControl.setValue(termId);
+    this.showPaymentTerm = false;
+  }
+
+  getSelectedTermLabel(): string {
+    const termId = this.paymentTermsControl.value;
+    const term = this.paymentTerms.find((t) => t.id === termId);
+    return term ? term.label : 'Select Payment Term';
+  }
+
   getFormTitle(): string {
-    return ''; // Default empty for new invoice
+    return this.isEditMode ? `Edit #${this.editingInvoiceId}` : 'New Invoice';
   }
 
   get items(): FormArray {
@@ -116,7 +144,7 @@ export class NewInvoiceFormComponent implements OnInit {
       toPostCode: invoice.clientAddress.postCode,
       toCountry: invoice.clientAddress.country,
       date: invoice.createdAt,
-      paymentTerms: invoice.paymentTerms.toString(),
+      paymentTerms: invoice.paymentTerms,
       description: invoice.description,
     });
 
@@ -130,21 +158,22 @@ export class NewInvoiceFormComponent implements OnInit {
     });
   }
 
-  // Update onSubmit in new-invoice-form.component.ts
   onSubmit(status: 'draft' | 'pending') {
-    if (this.newInvoiceForm.invalid) {
+    if (this.newInvoiceForm.invalid && status !== 'draft') {
       this.newInvoiceForm.markAllAsTouched();
       return;
     }
 
     const raw = this.newInvoiceForm.getRawValue();
-    const currentStatus =
-      this.isEditMode && this.editingInvoiceId
-        ? (this.invoiceService.getCurrentStatus(this.editingInvoiceId) as
-            | 'draft'
-            | 'pending'
-            | 'paid')
-        : status;
+    // const currentStatus =
+    //   this.isEditMode && this.editingInvoiceId
+    //     ? (this.invoiceService.getCurrentStatus(this.editingInvoiceId) as
+    //         | 'draft'
+    //         | 'pending'
+    //         | 'paid')
+    //     : status;
+
+    const currentStatus = status;
 
     const invoice: Invoice = {
       id: this.editingInvoiceId || Date.now().toString(),
@@ -184,14 +213,18 @@ export class NewInvoiceFormComponent implements OnInit {
       this.invoiceService.addInvoice(invoice);
     }
 
-    this.router.navigate(['/invoices']);
+    this.goBack();
   }
+
   onCancel() {
     this.newInvoiceForm.reset();
     this.items.clear();
-    // this.addItem();
-    // this.router.navigate(['/']);
+    this.router.navigate([{ outlets: { modal: null } }], {
+      relativeTo: this.route.parent,
+    });
+  }
 
+  goBack() {
     this.router.navigate([{ outlets: { modal: null } }], {
       relativeTo: this.route.parent,
     });

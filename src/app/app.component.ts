@@ -5,7 +5,7 @@ import { InvoiceService } from '../services/invoice.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

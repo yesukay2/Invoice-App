@@ -3,12 +3,13 @@ import { NewInvoiceFormComponent } from '../new-invoice-form/new-invoice-form.co
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-edit-invoice-form',
   standalone: true,
   templateUrl: '../new-invoice-form/new-invoice-form.component.html', // Use the same template
-  imports: [CommonModule, ReactiveFormsModule, RouterModule], // Add CommonModule
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, NavBarComponent], // Add CommonModule
   styleUrls: ['../new-invoice-form/new-invoice-form.component.scss'],
 })
 export class EditInvoiceFormComponent extends NewInvoiceFormComponent {

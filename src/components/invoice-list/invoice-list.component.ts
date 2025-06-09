@@ -5,6 +5,7 @@ import { InvoiceService } from '../../services/invoice.service';
 import { InvoiceItemComponent } from '../invoice-item/invoice-item.component';
 import { EmptyListComponent } from '../empty-list/empty-list.component';
 import { RouterModule, Router } from '@angular/router';
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
 @Component({
   selector: 'app-invoice-list',
   standalone: true,
@@ -23,25 +24,31 @@ export class InvoiceListComponent {
   invoices$ = this.invoiceService.invoices$;
 
   // Create reactive selectedStatus
-  private selectedStatus$ = new BehaviorSubject<string>('All');
+  protected selectedStatus = new BehaviorSubject<string>('All');
 
-  // Filter invoices based on selected status
-  filteredInvoices$ = combineLatest([
-    this.invoices$,
-    this.selectedStatus$,
-  ]).pipe(
+  filteredInvoices$ = combineLatest([this.invoices$, this.selectedStatus]).pipe(
     map(([invoices, selectedStatus]) =>
-      selectedStatus === 'All'
+      selectedStatus.toLowerCase() === 'all'
         ? invoices
-        : invoices.filter((inv) => inv.status === selectedStatus)
+        : invoices.filter(
+            (inv) => inv.status.toLowerCase() === selectedStatus.toLowerCase()
+          )
     )
   );
 
   // For reactive count
   invoiceCount$ = this.invoices$.pipe(map((invoices) => invoices.length));
 
-  filterBy(status: string) {
-    this.selectedStatus$.next(status);
+  // Dropdown toggle state
+  showDropdown = false;
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  selectStatus(status: string) {
+    this.selectedStatus.next(status);
+    this.showDropdown = false; // Close dropdown after selection
   }
 
   newInvoiceModal() {

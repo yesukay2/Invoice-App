@@ -1,15 +1,4 @@
 <section class="invoice-screen">
-  <aside>
-    <div class="side-bar">
-      <img src="assets/images/logo.svg" id="logo" alt="logo" />
-      <div class="theme-X-avatar">
-        <img src="assets/images/moon.svg" alt="theme-toggler" />
-        <hr />
-        <img src="assets/images/avatar.png" alt="avatar" />
-      </div>
-    </div>
-  </aside>
-
   <main>
     <section class="cta-bar">
       <div id="invoice-count">
@@ -19,17 +8,18 @@
 
       <div class="invoice-list-cta">
         <div class="custom-select">
-          <button class="select-button">
-            <span class="selected-value">Filter by status</span>
+          <button class="select-button" (click)="toggleDropdown()">
+            <span class="selected-value">{{ selectedStatus | async }}</span>
             <img src="../../assets/images/down-chevron.png" alt="" />
           </button>
-          <ul class="select-dropdown hidden">
-            <li (click)="filterBy('All')">All</li>
-            <li (click)="filterBy('Draft')">Draft</li>
-            <li (click)="filterBy('Pending')">Pending</li>
-            <li (click)="filterBy('Paid')">Paid</li>
+          <ul class="select-dropdown" [class.hidden]="!showDropdown">
+            <li (click)="selectStatus('All')">All</li>
+            <li (click)="selectStatus('Draft')">Draft</li>
+            <li (click)="selectStatus('Pending')">Pending</li>
+            <li (click)="selectStatus('Paid')">Paid</li>
           </ul>
         </div>
+
         <a (click)="newInvoiceModal()">
           <button id="new-invoice-btn">
             <span id="plus">+</span>New Invoice

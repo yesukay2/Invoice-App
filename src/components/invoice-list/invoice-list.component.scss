@@ -13,11 +13,6 @@
   width: 100%;
 }
 
-.invoice-list {
-  height: 100vh;
-  width: 100%;
-}
-
 aside {
   left: 0;
   position: fixed;
@@ -30,6 +25,11 @@ aside {
   border-radius: 0 1.2rem 1.2rem 0;
   @include flex-center(column, center);
   justify-content: space-between;
+}
+
+.invoice-list {
+  height: 100vh;
+  width: 100%;
 }
 
 main {
@@ -136,6 +136,7 @@ main {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   max-height: 200px;
   overflow-y: auto;
+  z-index: 99;
 }
 
 .select-dropdown::-webkit-scrollbar {
