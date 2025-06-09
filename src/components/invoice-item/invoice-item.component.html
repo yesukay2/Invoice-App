@@ -24,7 +24,7 @@
       [ngClass]="'status-' + invoice.status.toLowerCase()"
     >
       <span class="dot"></span>
-      <span class="status">{{ invoice.status }}</span>
+      <span class="status">{{ invoice.status | titlecase }}</span>
     </div>
     <button class="expand-invoice" (click)="expandInvoice()">
       <img src="../../assets/images/next.png" alt="expand-invoice-button" />

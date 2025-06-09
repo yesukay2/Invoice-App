@@ -265,3 +265,13 @@ button {
   font-size: 24px;
   font-weight: bold;
 }
+
+@media screen and (max-width: 768px) {
+  .invoice-screen {
+    padding: 3rem;
+  }
+
+  .invoice-details {
+    margin: 3rem auto 3rem auto;
+  }
+}

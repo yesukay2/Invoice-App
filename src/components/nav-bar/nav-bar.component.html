@@ -5,12 +5,16 @@
   </div>
 
   <div class="footer-container">
-    <div class="darkmode-toggle">
-      <button class="toggle-button">
+    <div class="darkmode-toggle" (click)="toggleDarkMode()">
+      <button class="toggle-button" aria-label="Toggle dark mode">
         <img src="../../assets/images/moon.svg" alt="" class="toggle-icon" />
       </button>
     </div>
     <div class="hr"></div>
-    <img src="../../assets/images/avatar.png" alt="" class="profile-photo" />
+    <img
+      src="../../assets/images/avatar.png"
+      alt="User profile"
+      class="profile-photo"
+    />
   </div>
 </div>
