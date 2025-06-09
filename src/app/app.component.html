@@ -1,7 +1,9 @@
 <div class="app-wrapper">
   <app-nav-bar></app-nav-bar>
-  <section class="navigation-wrapper">
-    <router-outlet />
-  </section>
-  <router-outlet name="modal"></router-outlet>
+  <div class="main-content">
+    <section class="navigation-wrapper">
+      <router-outlet></router-outlet>
+    </section>
+    <router-outlet name="modal"></router-outlet>
+  </div>
 </div>

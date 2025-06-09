@@ -3,6 +3,7 @@
 
 :host {
   position: fixed;
+  z-index: 11;
 }
 aside {
   left: 0;
@@ -86,6 +87,20 @@ aside {
   z-index: 10;
   width: inherit;
   // height: 37.71px;
+}
+
+.main-content-adjustment {
+  margin-left: 7rem;
+  transition: margin-left 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding-top: 55.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 4.5rem;
+  }
 }
 
 button {
