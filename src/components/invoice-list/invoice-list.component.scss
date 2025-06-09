@@ -107,7 +107,7 @@ main {
   @include flex-center(row, center);
   border-radius: 3rem;
   height: 3rem;
-  width: 9.375rem;
+  width: 9.4rem;
   gap: 1rem;
   box-shadow: none;
   border: none;
@@ -216,7 +216,7 @@ main {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   max-height: 200px;
   overflow-y: auto;
-  z-index: 99;
+  z-index: 1;
 }
 
 .select-dropdown::-webkit-scrollbar {
