@@ -7,4 +7,8 @@ import { RouterModule } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
 })
-export class NavBarComponent {}
+export class NavBarComponent {
+  toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+}
