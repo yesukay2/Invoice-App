@@ -1,1 +1,225 @@
-<p>{{ newvariable }}</p>
+<div class="new-invoice-wrapper">
+  <app-nav-bar></app-nav-bar>
+  <section class="wrapper-content">
+    <form
+      [formGroup]="newInvoiceForm"
+      (ngSubmit)="onSubmit('pending')"
+      class="form-container"
+    >
+      <section class="navigation-conatiner">
+        <h1 class="form-title">{{ getFormTitle() || "New Invoice" }}</h1>
+      </section>
+
+      <!-- Bill From Section -->
+      <section class="group-container">
+        <h2>Bill From</h2>
+
+        <div class="col-group">
+          <label for="street-address">Street Address</label>
+          <input
+            type="text"
+            id="street-address"
+            formControlName="fromStreetAddress"
+          />
+        </div>
+
+        <div class="row-group">
+          <div class="col-group">
+            <label for="city">City</label>
+            <input type="text" id="city" formControlName="fromCity" />
+          </div>
+
+          <div class="col-group">
+            <label for="post-code">Post Code</label>
+            <input type="text" id="post-code" formControlName="fromPostCode" />
+          </div>
+
+          <div class="col-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" formControlName="fromCountry" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Bill To Section -->
+      <section class="group-container">
+        <h2>Bill To</h2>
+
+        <div class="col-group">
+          <label>Client's Name</label>
+          <input type="text" formControlName="clientName" />
+        </div>
+
+        <div class="col-group">
+          <label>Client's Email</label>
+          <input
+            type="email"
+            formControlName="clientEmail"
+            placeholder="e.g. email@example.com"
+          />
+        </div>
+
+        <div class="col-group">
+          <label>Street Address</label>
+          <input type="text" formControlName="toStreetAddress" />
+        </div>
+
+        <div class="row-group">
+          <div class="col-group">
+            <label>City</label>
+            <input type="text" formControlName="toCity" />
+          </div>
+
+          <div class="col-group">
+            <label>Post Code</label>
+            <input type="text" formControlName="toPostCode" />
+          </div>
+
+          <div class="col-group">
+            <label>Country</label>
+            <input type="text" formControlName="toCountry" />
+          </div>
+        </div>
+
+        <section class="group-container">
+          <div class="row-group payment-container">
+            <div class="col-group">
+              <label>Invoice Date</label>
+              <input type="date" formControlName="date" />
+            </div>
+
+            <div class="col-group payment-term-container">
+              <label>Payment Terms</label>
+              <button
+                (click)="toggleShowTerm()"
+                type="button"
+                class="custom-drop-down"
+              >
+                <span>
+                  {{ getSelectedTermLabel() }}
+                </span>
+                <img src="../../assets/images/down-chevron.png" />
+              </button>
+              <ng-template [ngIf]="showPaymentTerm">
+                <div class="dropdowm-container">
+                  <button
+                    (click)="setSelectedTerm(1)"
+                    type="button"
+                    class="custom-drop-down-item border-b"
+                  >
+                    <span>Net 1 Day</span>
+                  </button>
+                  <button
+                    (click)="setSelectedTerm(7)"
+                    type="button"
+                    class="custom-drop-down-item border-b"
+                  >
+                    <span>Net 7 Days</span>
+                  </button>
+                  <button
+                    (click)="setSelectedTerm(14)"
+                    type="button"
+                    class="custom-drop-down-item border-b"
+                  >
+                    <span>Net 14 Days</span>
+                  </button>
+                  <button
+                    (click)="setSelectedTerm(30)"
+                    type="button"
+                    class="custom-drop-down-item"
+                  >
+                    <span>Net 30 Days</span>
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="col-group">
+            <label>Project Description</label>
+            <input
+              type="text"
+              formControlName="description"
+              placeholder="e.g. Graphic Design Service"
+            />
+          </div>
+        </section>
+      </section>
+
+      <!-- Item List Section -->
+      <section class="group-container">
+        <h2>Item List</h2>
+        <div class="items-container">
+          <div class="item-list-header">
+            <h3>Item Name</h3>
+            <h3>Qty.</h3>
+            <h3>Price</h3>
+            <h3>Total</h3>
+            <h3></h3>
+          </div>
+          <div formArrayName="items" class="items-list">
+            <div
+              *ngFor="let item of items.controls; let i = index"
+              [formGroupName]="i"
+              class="item-row"
+            >
+              <div class="col-group">
+                <input
+                  type="text"
+                  formControlName="itemName"
+                  class="item-input"
+                />
+              </div>
+              <div class="col-group">
+                <input
+                  type="number"
+                  formControlName="itemQty"
+                  (input)="updateItemTotal(i)"
+                  class="item-input"
+                />
+              </div>
+              <div class="col-group">
+                <input
+                  type="number"
+                  formControlName="itemPrice"
+                  (input)="updateItemTotal(i)"
+                  class="item-input"
+                />
+              </div>
+              <div class="col-group">
+                <input
+                  type="text"
+                  formControlName="itemTotal"
+                  readonly
+                  class="item-total"
+                />
+              </div>
+              <div class="col-group delete-btn-cell">
+                <button
+                  type="button"
+                  class="delete-btn"
+                  (click)="removeItem(i)"
+                >
+                  <img src="../../assets/images/delete.png" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="add-invoice-item" (click)="addItem()">
+          + Add New Item
+        </button>
+      </section>
+
+      <section class="form-action">
+        <button (click)="onCancel()" class="discard-btn">Discard</button>
+
+        <div class="save-btn-container">
+          <button (click)="onSubmit('draft')" class="save-draft">
+            Save as Draft
+          </button>
+          <button type="submit" class="save-send">Save & send</button>
+        </div>
+      </section>
+    </form>
+  </section>
+</div>

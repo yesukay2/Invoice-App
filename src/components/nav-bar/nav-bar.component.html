@@ -1,6 +1,16 @@
-<nav>
-  <a [routerLink]="['invoices']"> Invoices </a>
-  <a [routerLink]="['/invoices/new']"> Create Invoice </a>
-  <a [routerLink]="['/invoices/:id']">Invoice Details</a>
-  <a [routerLink]="['/invoices/:id/edit']"> Edit Invoice </a>
-</nav>
+<div class="sidebar-wrapper">
+  <div class="logo-container">
+    <div class="logo-button-bg"></div>
+    <img src="../../assets/images/logo.svg" alt="Logo" class="logo" />
+  </div>
+
+  <div class="footer-container">
+    <div class="darkmode-toggle">
+      <button class="toggle-button">
+        <img src="../../assets/images/moon.svg" alt="" class="toggle-icon" />
+      </button>
+    </div>
+    <div class="hr"></div>
+    <img src="../../assets/images/avatar.png" alt="" class="profile-photo" />
+  </div>
+</div>

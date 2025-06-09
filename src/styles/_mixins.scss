@@ -1,0 +1,32 @@
+@use "variables" as *;
+
+@mixin flex-center($direction: row, $align: center) {
+  display: flex;
+
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+@mixin invoice-number {
+  color: rgb($black-200, 0.2);
+  font-weight: 700;
+}
+
+@mixin hashtag {
+  color: rgb($violet-100, 0.3);
+}
+
+@mixin light-blue-12 {
+  color: #7e88c3;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}

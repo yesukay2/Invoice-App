@@ -1,0 +1,143 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+.invoice-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $light-bg;
+  border-radius: 0.5rem;
+  padding-inline: 2rem;
+  padding-block: 1.5rem;
+  box-shadow: 0 8px 8px -13px #48549f;
+  margin-bottom: 1.5rem;
+}
+
+.due-date {
+  color: #7e88c3;
+  opacity: 0.4;
+  font-size: 0.75rem;
+  letter-spacing: -0.25px;
+}
+
+.status-expand-cluster {
+  @include flex-center(row, center);
+}
+
+.expand-invoice img {
+  opacity: 0.5;
+  height: 1rem;
+}
+
+.invoice-id {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: -0.25px;
+}
+
+.hashtag {
+  @include hashtag;
+}
+
+.invoice-number {
+  @include invoice-number;
+}
+
+.due {
+  color: $grey-200;
+}
+
+.date {
+  color: $violet-100;
+  font-weight: 500;
+}
+
+.client-name {
+  color: $grey-150;
+  font-weight: 500;
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.total-amount {
+  color: $black-200;
+  opacity: 0.5;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: -0.8px;
+  padding-block: 0.5rem;
+}
+
+.dot {
+  @include dot();
+  background-color: $green-100;
+  // margin-left: 1rem;
+}
+
+.status {
+  color: $green-100;
+  font-weight: calc(600 - 50);
+  font-size: 0.8rem;
+  letter-spacing: -0.25px;
+}
+
+.payment-status {
+  color: $violet-100;
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: -0.25px;
+  padding-block: 0.813rem;
+  @include flex-center(row, center);
+  justify-content: center;
+  border-radius: 6px;
+  color: $green-100;
+  background: #33d6a014;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-block: 0.75rem;
+  width: 6.5rem;
+  height: 1.5rem;
+
+  &.status-pending {
+    background: rgb($orange, 0.05);
+
+    .dot {
+      background-color: rgb($orange, 0.4);
+    }
+
+    .status {
+      color: rgb($orange, 0.2);
+    }
+  }
+
+  &.status-draft {
+    background: rgb($black-300, 0.05);
+
+    .dot {
+      background-color: $black-50;
+    }
+
+    .status {
+      color: $black-50;
+    }
+  }
+
+  &.status-paid {
+    background: rgb($green-100, 0.05);
+
+    .dot {
+      background-color: $green-100;
+    }
+
+    .status {
+      color: $green-100;
+    }
+  }
+}
+
+.status-expand-cluster button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

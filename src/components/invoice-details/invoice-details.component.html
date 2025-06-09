@@ -1,1 +1,190 @@
-<p>{{ detailsvariable }}</p>
+<!-- <div class="invoice-screen" *ngIf="invoice">
+  <div class="invoice-details">
+    <div class="back-button-container" (click)="goBack()">
+      <img
+        class="back-button"
+        src="../../assets/images/down-chevron.png"
+        alt="back button"
+      />
+      <p>Go Back</p>
+    </div>
+
+    <div class="cta-container">
+      <div class="status-wrapper">
+        <p class="status-label">Status</p>
+        <div class="status-container">
+          <span class="dot"></span>
+          <p class="status">{{ invoice!.status }}</p>
+        </div>
+      </div>
+
+      <div class="buttons-container">
+        <button class="edit-invoice">Edit</button>
+        <button class="delete-invoice">Delete</button>
+        <button class="mark-as-paid">Mark as Paid</button>
+      </div>
+    </div>
+
+    <div class="details-content">
+      <div>
+        <div class="invoice-id-container">
+          <p class="invoice-id-label">
+            <span class="hash">#</span>
+            <span class="invoice-id">{{ invoice!.id }}</span>
+          </p>
+          <p class="section-label">{{ invoice!.description }}</p>
+        </div>
+
+        <div class="address-container">
+          <p class="address-1">{{ invoice!.senderAddress.street }}</p>
+          <p class="address-2">{{ invoice!.senderAddress.city }}</p>
+          <p class="address-3">{{ invoice!.senderAddress.postCode }}</p>
+          <p class="country">{{ invoice!.senderAddress.country }}</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="dates-container">
+          <p>Invoice Date</p>
+          <p>{{ invoice!.createdAt }}</p>
+          <p>Payment Due</p>
+          <p>{{ invoice!.createdAt }}</p>
+        </div>
+        <div class="billing-address">
+          <p>Bill To</p>
+          <p>{{ invoice!.clientName }}</p>
+          <p>{{ invoice!.clientAddress.street }}</p>
+          <p>{{ invoice!.clientAddress.city }}</p>
+          <p>{{ invoice!.clientAddress.postCode }}</p>
+          <p>{{ invoice!.clientAddress.country }}</p>
+        </div>
+        <div class="client-email">
+          <p>Sent to</p>
+          <p>{{ invoice!.clientEmail }}</p>
+        </div>
+      </div>
+
+      <table class="invoice-table">
+        <tr>
+          <th>Item Name</th>
+          <th>QTY.</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+        <tr *ngFor="let item of invoice.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>£{{ item.price.toFixed(2) }}</td>
+          <td>£{{ item.total.toFixed(2) }}</td>
+        </tr>
+      </table>
+
+      <div class="total-container">
+        <p class="amount-due-label">Amount Due</p>
+        <p class="amount-due">£{{ invoice!.total.toFixed(2) }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- invoice-details.component.html -->
+<div class="invoice-screen" *ngIf="invoice">
+  <div class="invoice-details">
+    <div class="back-button-container" (click)="goBack()">
+      <img
+        class="back-button"
+        src="../../assets/images/down-chevron.png"
+        alt="back button"
+      />
+      <p>Go Back</p>
+    </div>
+
+    <div class="cta-container">
+      <div class="status-wrapper">
+        <p class="status-label">Status</p>
+        <div
+          class="status-container"
+          [ngClass]="'status-' + invoice.status.toLowerCase()"
+        >
+          <span class="dot"></span>
+          <p class="status">{{ invoice.status }}</p>
+        </div>
+      </div>
+
+      <div class="buttons-container">
+        <button class="edit-invoice" (click)="editInvoice()">Edit</button>
+        <button class="delete-invoice" (click)="deleteInvoice()">Delete</button>
+        <button
+          class="mark-as-paid"
+          (click)="markAsPaid()"
+          [disabled]="invoice.status === 'paid'"
+        >
+          Mark as Paid
+        </button>
+      </div>
+    </div>
+
+    <!-- Rest of the template remains the same -->
+    <!-- ... -->
+
+    <div class="details-content">
+      <div>
+        <div class="invoice-id-container">
+          <p class="invoice-id-label">
+            <span class="hash">#</span>
+            <span class="invoice-id">{{ invoice!.id }}</span>
+          </p>
+          <p class="section-label">{{ invoice!.description }}</p>
+        </div>
+
+        <div class="address-container">
+          <p class="address-1">{{ invoice!.senderAddress.street }}</p>
+          <p class="address-2">{{ invoice!.senderAddress.city }}</p>
+          <p class="address-3">{{ invoice!.senderAddress.postCode }}</p>
+          <p class="country">{{ invoice!.senderAddress.country }}</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="dates-container">
+          <p>Invoice Date</p>
+          <p>{{ invoice!.createdAt | invoiceDate }}</p>
+          <p>Payment Due</p>
+          <p>{{ invoice!.createdAt | invoiceDate }}</p>
+        </div>
+        <div class="billing-address">
+          <p>Bill To</p>
+          <p>{{ invoice!.clientName }}</p>
+          <p>{{ invoice!.clientAddress.street }}</p>
+          <p>{{ invoice!.clientAddress.city }}</p>
+          <p>{{ invoice!.clientAddress.postCode }}</p>
+          <p>{{ invoice!.clientAddress.country }}</p>
+        </div>
+        <div class="client-email">
+          <p>Sent to</p>
+          <p>{{ invoice!.clientEmail }}</p>
+        </div>
+      </div>
+
+      <table class="invoice-table">
+        <tr>
+          <th>Item Name</th>
+          <th>QTY.</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+        <tr *ngFor="let item of invoice.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>£{{ item.price.toFixed(2) }}</td>
+          <td>£{{ item.total.toFixed(2) }}</td>
+        </tr>
+      </table>
+
+      <div class="total-container">
+        <p class="amount-due-label">Amount Due</p>
+        <p class="amount-due">£{{ invoice!.total.toFixed(2) }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+.delete-modal-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.464);
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  max-width: 25rem;
+  border-radius: 8px;
+  background-color: white;
+  padding: 48px;
+}
+
+.modal-content h1 {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  color: #0c0e16;
+}
+
+.modal-content p {
+  color: #888eb0;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 22px;
+  letter-spacing: -0.25px;
+}
+
+.cancel-btn {
+  @include light-blue-12;
+  background-color: #f9fafe;
+  color: #7e88c3;
+  border: none;
+  font-weight: bold;
+  padding: 17px 23px;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.discard-btn {
+  @include light-blue-12;
+  background-color: #f9fafe;
+  color: #7e88c3;
+  border: none;
+  font-weight: bold;
+  padding: 17px 23px;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.delete-btn {
+  @include light-blue-12;
+  background-color: #ec5757;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 17px 23px;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.modal-content div {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    margin: 0 24px;
+  }
+}

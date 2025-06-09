@@ -1,1 +1,39 @@
+<section class="invoice-screen">
+  <main>
+    <section class="cta-bar">
+      <div id="invoice-count">
+        <h1>Invoices</h1>
+        <p>There are {{ invoiceCount$ | async }} total invoices</p>
+      </div>
 
+      <div class="invoice-list-cta">
+        <div class="custom-select">
+          <button class="select-button" (click)="toggleDropdown()">
+            <span class="selected-value">{{ selectedStatus | async }}</span>
+            <img src="../../assets/images/down-chevron.png" alt="" />
+          </button>
+          <ul class="select-dropdown" [class.hidden]="!showDropdown">
+            <li (click)="selectStatus('All')">All</li>
+            <li (click)="selectStatus('Draft')">Draft</li>
+            <li (click)="selectStatus('Pending')">Pending</li>
+            <li (click)="selectStatus('Paid')">Paid</li>
+          </ul>
+        </div>
+
+        <a (click)="newInvoiceModal()">
+          <button id="new-invoice-btn">
+            <span id="plus">+</span>New Invoice
+          </button>
+        </a>
+      </div>
+    </section>
+
+    <section class="invoice-list">
+      @for (invoice of filteredInvoices$ | async; track invoice.id) {
+      <app-invoice-item [invoice]="invoice"></app-invoice-item>
+      } @empty {
+      <app-empty-list></app-empty-list>
+      }
+    </section>
+  </main>
+</section>
