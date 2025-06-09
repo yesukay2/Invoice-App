@@ -41,12 +41,13 @@
 
 .form-action {
   background-color: #fff;
-  padding: 31px 56px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top-right-radius: 20px;
   border-top: 1px solid rgba(128, 128, 128, 0.11);
+  width: 100%;
 }
 
 /* Buttons */
@@ -388,11 +389,6 @@ label,
 
   .form-container {
     padding: 24px;
-  }
-
-  .form-action {
-    padding: 21px 24px;
-    border-radius: 0;
   }
 
   .form-title {
